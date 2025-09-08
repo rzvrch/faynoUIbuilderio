@@ -59,9 +59,9 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         // Material Design 3 specific colors
-        'surface-container-lowest': "hsl(var(--surface-container-lowest))",
-        'on-surface-variant': "hsl(var(--on-surface-variant))",
-        'outline': "hsl(var(--outline))",
+        "surface-container-lowest": "hsl(var(--surface-container-lowest))",
+        "on-surface-variant": "hsl(var(--on-surface-variant))",
+        outline: "hsl(var(--outline))",
       },
       borderRadius: {
         lg: "var(--radius)",

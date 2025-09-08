@@ -1,6 +1,6 @@
-import React, { useState, KeyboardEvent } from 'react';
-import { Send, Image } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import React, { useState, KeyboardEvent } from "react";
+import { Send, Image } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface MessageInputProps {
   onSendMessage: (message: string) => void;
@@ -8,22 +8,22 @@ interface MessageInputProps {
   disabled?: boolean;
 }
 
-export function MessageInput({ 
-  onSendMessage, 
+export function MessageInput({
+  onSendMessage,
   placeholder = "Let us know what a look are you looking for?",
-  disabled = false 
+  disabled = false,
 }: MessageInputProps) {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const handleSend = () => {
     if (message.trim() && !disabled) {
       onSendMessage(message.trim());
-      setMessage('');
+      setMessage("");
     }
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
@@ -53,18 +53,18 @@ export function MessageInput({
               "w-full resize-none border-0 outline-none bg-transparent",
               "text-sm sm:text-base leading-5 sm:leading-6 tracking-[0.5px] text-foreground",
               "placeholder:text-outline placeholder:text-sm sm:placeholder:text-lg",
-              "py-1.5"
+              "py-1.5",
             )}
             rows={1}
             style={{
-              minHeight: '35px',
-              maxHeight: '128px',
-              overflowY: 'auto',
+              minHeight: "35px",
+              maxHeight: "128px",
+              overflowY: "auto",
             }}
             onInput={(e) => {
               const target = e.target as HTMLTextAreaElement;
-              target.style.height = 'auto';
-              target.style.height = Math.min(target.scrollHeight, 128) + 'px';
+              target.style.height = "auto";
+              target.style.height = Math.min(target.scrollHeight, 128) + "px";
             }}
           />
         </div>
@@ -77,7 +77,7 @@ export function MessageInput({
             "flex-shrink-0 p-2 rounded-full transition-colors",
             message.trim() && !disabled
               ? "text-primary hover:bg-primary/10"
-              : "text-outline cursor-not-allowed"
+              : "text-outline cursor-not-allowed",
           )}
           aria-label="Send message"
         >

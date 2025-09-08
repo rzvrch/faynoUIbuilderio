@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { NavigationRail } from '../components/NavigationRail';
-import { ChatArea } from '../components/ChatArea';
-import { MessageInput } from '../components/MessageInput';
-import { ChatMessageProps } from '../components/ChatMessage';
+import React, { useState, useEffect } from "react";
+import { NavigationRail } from "../components/NavigationRail";
+import { ChatArea } from "../components/ChatArea";
+import { MessageInput } from "../components/MessageInput";
+import { ChatMessageProps } from "../components/ChatMessage";
 
 export default function Index() {
   const [isRailCollapsed, setIsRailCollapsed] = useState(true); // Start collapsed on mobile
@@ -20,45 +20,48 @@ export default function Index() {
     };
 
     checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-    return () => window.removeEventListener('resize', checkIsMobile);
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
   const [messages, setMessages] = useState<ChatMessageProps[]>([
     {
-      message: "Мені цікаво, які твої можливості по підбору одягу і відображення вибраних позицій у чаті. Можеш зробити приклади на основі одягу зі сайту Zara. підбери мені цілісний образ на вечерю із дівчиною у ресторані",
+      message:
+        "Мені цікаво, які твої можливості по підбору одягу і відображення вибраних позицій у чаті. Можеш зробити приклади на основі одягу зі сайту Zara. підбери мені цілісний образ на вечерю із дівчиною у ресторані",
       type: "sent",
-      timestamp: "12:34"
+      timestamp: "12:34",
     },
     {
-      message: "Звісно! Уявімо, що я твій особистий стиліст 😊\nОсь що я можу зробити для тебе в чаті на прикладі Zara:\n\n🔍 Контекст:\nПодія: вечеря з дівчиною в ресторані\nЛокація: припустимо, сучасний ресторан з невимушеним, але стильним дрес-кодом\nМета: виглядати впевнено, з елегантним стилем, без надмірної офіційності",
+      message:
+        "Звісно! Уявімо, що я твій особистий стиліст 😊\nОсь що я можу зробити для тебе в чаті на прикладі Zara:\n\n🔍 Контекст:\nПодія: вечеря з дівчиною в ресторані\nЛокація: припустимо, сучасний ресторан з невимушеним, але стильним дрес-кодом\nМета: виглядати впевнено, з елегантним стилем, без надмірної офіційності",
       type: "received",
-      timestamp: "12:35"
-    }
+      timestamp: "12:35",
+    },
   ]);
 
   const handleSendMessage = (message: string) => {
     const newMessage: ChatMessageProps = {
       message,
       type: "sent",
-      timestamp: new Date().toLocaleTimeString('uk-UA', { 
-        hour: '2-digit', 
-        minute: '2-digit' 
-      })
+      timestamp: new Date().toLocaleTimeString("uk-UA", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     };
-    
-    setMessages(prev => [...prev, newMessage]);
+
+    setMessages((prev) => [...prev, newMessage]);
 
     // Simulate assistant response after a brief delay
     setTimeout(() => {
       const assistantResponse: ChatMessageProps = {
-        message: "Дякую за ваше повідомлення! Я розумію, що ви шукаете стильний образ для особливого випадку. Дайте мені трохи часу, щоб підібрати ідеальний комплект одягу для вашої вечері в ресторані.",
+        message:
+          "Дякую за ваше повідомлення! Я розумію, що ви шукаете стильний образ для особливого випадку. Дайте мені трохи часу, щоб підібрати ідеальний комплект одягу для вашої вечері в ресторані.",
         type: "received",
-        timestamp: new Date().toLocaleTimeString('uk-UA', { 
-          hour: '2-digit', 
-          minute: '2-digit' 
-        })
+        timestamp: new Date().toLocaleTimeString("uk-UA", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
-      setMessages(prev => [...prev, assistantResponse]);
+      setMessages((prev) => [...prev, assistantResponse]);
     }, 1000);
   };
 
@@ -83,10 +86,7 @@ export default function Index() {
       )}
 
       {/* Navigation Rail */}
-      <NavigationRail
-        isCollapsed={isRailCollapsed}
-        onToggle={toggleRail}
-      />
+      <NavigationRail isCollapsed={isRailCollapsed} onToggle={toggleRail} />
 
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col min-w-0 relative">
@@ -98,8 +98,18 @@ export default function Index() {
               className="p-2 rounded-lg hover:bg-muted transition-colors mr-3"
               aria-label="Open menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
             <h1 className="text-lg font-medium">Chat Assistant</h1>

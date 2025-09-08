@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
-import { MessageCircle, Menu, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import React, { useState } from "react";
+import { MessageCircle, Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface NavigationRailProps {
   isCollapsed?: boolean;
   onToggle?: () => void;
 }
 
-export function NavigationRail({ isCollapsed = false, onToggle }: NavigationRailProps) {
+export function NavigationRail({
+  isCollapsed = false,
+  onToggle,
+}: NavigationRailProps) {
   return (
     <div
       className={cn(
         "flex flex-col h-full bg-sidebar border-r border-sidebar-border transition-all duration-300 ease-in-out",
         // Mobile: sidebar is overlay when expanded, hidden when collapsed
         "md:relative absolute inset-y-0 left-0 z-50",
-        isCollapsed
-          ? "w-0 md:w-20 overflow-hidden"
-          : "w-80 md:w-80"
+        isCollapsed ? "w-0 md:w-20 overflow-hidden" : "w-80 md:w-80",
       )}
     >
       {/* Header */}
@@ -46,7 +47,7 @@ export function NavigationRail({ isCollapsed = false, onToggle }: NavigationRail
           <div
             className={cn(
               "flex items-center gap-3 p-3 rounded-[28px] bg-sidebar-accent cursor-pointer transition-colors",
-              isCollapsed && "justify-center"
+              isCollapsed && "justify-center",
             )}
           >
             <div className="flex items-center justify-center w-6 h-6">
@@ -66,7 +67,7 @@ export function NavigationRail({ isCollapsed = false, onToggle }: NavigationRail
         <div
           className={cn(
             "flex items-center gap-3",
-            isCollapsed && "justify-center"
+            isCollapsed && "justify-center",
           )}
         >
           <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
