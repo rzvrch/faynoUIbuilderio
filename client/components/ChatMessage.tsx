@@ -17,7 +17,8 @@ export function ChatMessage({ message, type, timestamp }: ChatMessageProps) {
     >
       <div
         className={cn(
-          "max-w-[600px] min-h-[44px] px-4 py-2 rounded-[20px] break-words",
+          "max-w-[600px] sm:max-w-[500px] md:max-w-[600px] min-h-[44px] px-4 py-2 rounded-[20px] break-words",
+          "mx-2 sm:mx-0", // Add margin on very small screens
           type === 'sent'
             ? "bg-secondary text-secondary-foreground rounded-br-[8px]"
             : "bg-white text-on-surface-variant border border-border rounded-bl-[8px]"
