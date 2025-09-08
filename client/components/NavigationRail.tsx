@@ -12,7 +12,11 @@ export function NavigationRail({ isCollapsed = false, onToggle }: NavigationRail
     <div
       className={cn(
         "flex flex-col h-full bg-sidebar border-r border-sidebar-border transition-all duration-300 ease-in-out",
-        isCollapsed ? "w-20" : "w-80"
+        // Mobile: sidebar is overlay when expanded, hidden when collapsed
+        "md:relative absolute inset-y-0 left-0 z-50",
+        isCollapsed
+          ? "w-0 md:w-20 overflow-hidden"
+          : "w-80 md:w-80"
       )}
     >
       {/* Header */}
