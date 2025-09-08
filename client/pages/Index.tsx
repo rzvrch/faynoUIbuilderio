@@ -1,61 +1,69 @@
-import { DemoResponse } from "@shared/api";
-import { useEffect, useState } from "react";
+import React, { useState } from 'react';
+import { NavigationRail } from '../components/NavigationRail';
+import { ChatArea } from '../components/ChatArea';
+import { MessageInput } from '../components/MessageInput';
+import { ChatMessageProps } from '../components/ChatMessage';
 
 export default function Index() {
-  const [exampleFromServer, setExampleFromServer] = useState("");
-  // Fetch users on component mount
-  useEffect(() => {
-    fetchDemo();
-  }, []);
-
-  // Example of how to fetch data from the server (if needed)
-  const fetchDemo = async () => {
-    try {
-      const response = await fetch("/api/demo");
-      const data = (await response.json()) as DemoResponse;
-      setExampleFromServer(data.message);
-    } catch (error) {
-      console.error("Error fetching hello:", error);
+  const [isRailCollapsed, setIsRailCollapsed] = useState(false);
+  const [messages, setMessages] = useState<ChatMessageProps[]>([
+    {
+      message: "Мені цікаво, які твої можливості по підбору одягу і відображення вибраних позицій у чаті. Можеш зробити приклади на основі одягу зі сайту Zara. підбери мені цілісний образ на вечерю із дівчиною у ресторані",
+      type: "sent",
+      timestamp: "12:34"
+    },
+    {
+      message: "Звісно! Уявімо, що я твій особистий стиліст 😊\nОсь що я можу зробити для тебе в чаті на прикладі Zara:\n\n🔍 Контекст:\nПодія: вечеря з дівчиною в ресторані\nЛокація: припустимо, сучасний ресторан з невимушеним, але стильним дрес-кодом\nМета: виглядати впевнено, з елегантним стилем, без надмірної офіційності",
+      type: "received",
+      timestamp: "12:35"
     }
+  ]);
+
+  const handleSendMessage = (message: string) => {
+    const newMessage: ChatMessageProps = {
+      message,
+      type: "sent",
+      timestamp: new Date().toLocaleTimeString('uk-UA', { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      })
+    };
+    
+    setMessages(prev => [...prev, newMessage]);
+
+    // Simulate assistant response after a brief delay
+    setTimeout(() => {
+      const assistantResponse: ChatMessageProps = {
+        message: "Дякую за ваше повідомлення! Я розумію, що ви шукаете стильний образ для особливого випадку. Дайте мені трохи часу, щоб підібрати ідеальний комплект одягу для вашої вечері в ресторані.",
+        type: "received",
+        timestamp: new Date().toLocaleTimeString('uk-UA', { 
+          hour: '2-digit', 
+          minute: '2-digit' 
+        })
+      };
+      setMessages(prev => [...prev, assistantResponse]);
+    }, 1000);
+  };
+
+  const toggleRail = () => {
+    setIsRailCollapsed(!isRailCollapsed);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-      <div className="text-center">
-        {/* TODO: FUSION_GENERATION_APP_PLACEHOLDER replace everything here with the actual app! */}
-        <h1 className="text-2xl font-semibold text-slate-800 flex items-center justify-center gap-3">
-          <svg
-            className="animate-spin h-8 w-8 text-slate-400"
-            viewBox="0 0 50 50"
-          >
-            <circle
-              className="opacity-30"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-            />
-            <circle
-              className="text-slate-600"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-              strokeDasharray="100"
-              strokeDashoffset="75"
-            />
-          </svg>
-          Generating your app...
-        </h1>
-        <p className="mt-4 text-slate-600 max-w-md">
-          Watch the chat on the left for updates that might need your attention
-          to finish generating
-        </p>
-        <p className="mt-4 hidden max-w-md">{exampleFromServer}</p>
+    <div className="flex h-screen bg-background overflow-hidden">
+      {/* Navigation Rail */}
+      <NavigationRail 
+        isCollapsed={isRailCollapsed} 
+        onToggle={toggleRail} 
+      />
+      
+      {/* Main Chat Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Chat Messages */}
+        <ChatArea messages={messages} />
+        
+        {/* Message Input */}
+        <MessageInput onSendMessage={handleSendMessage} />
       </div>
     </div>
   );
