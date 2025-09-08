@@ -30,11 +30,11 @@ export function MessageInput({
   };
 
   return (
-    <div className="p-6 bg-white border-t border-border">
-      <div className="flex items-end gap-3 p-4 rounded-[28px] border border-outline bg-white">
-        {/* Image Attachment Button */}
+    <div className="p-3 sm:p-6 bg-white border-t border-border">
+      <div className="flex items-end gap-2 sm:gap-3 p-3 sm:p-4 rounded-[28px] border border-outline bg-white">
+        {/* Image Attachment Button - Hidden on very small screens */}
         <button
-          className="flex-shrink-0 p-2 rounded-full hover:bg-muted transition-colors"
+          className="hidden sm:flex flex-shrink-0 p-2 rounded-full hover:bg-muted transition-colors"
           aria-label="Attach image"
           disabled={disabled}
         >
@@ -51,8 +51,8 @@ export function MessageInput({
             disabled={disabled}
             className={cn(
               "w-full resize-none border-0 outline-none bg-transparent",
-              "text-base leading-6 tracking-[0.5px] text-foreground",
-              "placeholder:text-outline placeholder:text-lg",
+              "text-sm sm:text-base leading-5 sm:leading-6 tracking-[0.5px] text-foreground",
+              "placeholder:text-outline placeholder:text-sm sm:placeholder:text-lg",
               "py-1.5"
             )}
             rows={1}
