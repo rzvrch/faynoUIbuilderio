@@ -22,6 +22,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          container: "hsl(var(--primary-container))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -57,6 +58,10 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Material Design 3 specific colors
+        'surface-container-lowest': "hsl(var(--surface-container-lowest))",
+        'on-surface-variant': "hsl(var(--on-surface-variant))",
+        'outline': "hsl(var(--outline))",
       },
       borderRadius: {
         lg: "var(--radius)",
