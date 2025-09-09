@@ -73,9 +73,9 @@ export function NavigationRail({
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-sidebar-border mx-auto">
+      <div className="flex items-center justify-center p-4 m-auto ml-0">
         {!isCollapsed && (
-          <div className="flex items-center gap-3 flex-1 py-[18px] px-4 rounded-full">
+          <div className="flex items-center rounded-full basis-0 flex-grow gap-3 py-[18px] px-4">
             <div className="flex items-center gap-3">
               <div className="text-[22px] font-medium leading-7 tracking-[0px] text-[#49454F] font-roboto">
                 FAYNO
@@ -104,7 +104,7 @@ export function NavigationRail({
       </div>
 
       {/* Navigation Items */}
-      <div className="flex-1 p-4 ml-auto flex flex-col justify-start items-center">
+      <div className="flex-1 p-4 mr-auto flex flex-col justify-start items-start">
         <div className="space-y-2">
           {/* Add New Chat Button */}
           <div className="relative" ref={menuRef}>
