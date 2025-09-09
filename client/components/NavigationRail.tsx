@@ -68,7 +68,7 @@ export function NavigationRail({
       className={cn(
         "flex flex-col h-full bg-sidebar border-r border-sidebar-border transition-all duration-300 ease-in-out",
         // Mobile: sidebar is overlay when expanded, hidden when collapsed
-        "md:relative absolute inset-y-0 left-0 z-50",
+        "md:relative absolute inset-y-0 left-0 z-50 ml-auto",
         isCollapsed ? "w-0 md:w-20 overflow-hidden" : "w-80 md:w-80",
       )}
     >
