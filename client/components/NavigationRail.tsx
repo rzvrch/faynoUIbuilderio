@@ -95,7 +95,7 @@ export function NavigationRail({
             isHoveringToggle ? (
               <PanelLeft className="w-5 h-5 text-sidebar-foreground" />
             ) : (
-              <span className="text-sidebar-foreground font-medium text-[20px] mx-auto">F</span>
+              <span className="block text-[#424A52] text-[20px] font-medium">F</span>
             )
           ) : (
             <X className="w-5 h-5 text-sidebar-foreground" />
