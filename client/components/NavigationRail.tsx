@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 interface NavigationRailProps {
   isCollapsed?: boolean;
   onToggle?: () => void;
+  onNewChat?: () => void;
 }
 
 export function NavigationRail({
