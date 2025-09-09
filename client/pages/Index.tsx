@@ -29,7 +29,7 @@ export default function Index() {
   const [messages, setMessages] = useState<ChatMessageProps[]>([
     {
       message:
-        "Мені цікаво, які твої можливості по підбору одягу і відображення вибраних позицій у чаті. Можеш зробити прикл��ди на основі одягу зі сайту Zara. підбери мені цілісний образ на вечерю із дівчиною у ресторані",
+        "Мені цікаво, які твої можливості по підбору одягу і ві��ображення вибраних позицій у чаті. Можеш зробити приклади на основі одягу зі сайту Zara. підбери мені цілісний образ на вечерю із дівчиною у ресторані",
       type: "sent",
       timestamp: "12:34",
     },
@@ -125,6 +125,15 @@ export default function Index() {
         {/* Message Input */}
         <MessageInput onSendMessage={handleSendMessage} />
       </div>
+
+      {/* Floating Action Button */}
+      <FloatingActionButton onClick={() => setIsCatalogOpen(true)} />
+
+      {/* Product Catalog Modal */}
+      <ProductCatalog
+        isOpen={isCatalogOpen}
+        onClose={() => setIsCatalogOpen(false)}
+      />
     </div>
   );
 }
