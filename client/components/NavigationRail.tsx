@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageCircle, Menu, X, LogOut } from "lucide-react";
+import { MessageCircle, Menu, X, LogOut, PanelLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavigationRailProps {
@@ -24,6 +24,7 @@ export function NavigationRail({
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [menuPos, setMenuPos] = useState<{ left: number; top: number } | null>(null);
   const toggleMenu = () => setMenuOpen((v) => !v);
+  const [isHoveringToggle, setIsHoveringToggle] = useState(false);
 
   useEffect(() => {
     function handleDocClick(e: MouseEvent) {
@@ -84,11 +85,18 @@ export function NavigationRail({
         )}
         <button
           onClick={onToggle}
+          onMouseEnter={() => setIsHoveringToggle(true)}
+          onMouseLeave={() => setIsHoveringToggle(false)}
           className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors"
           aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          title={isCollapsed && isHoveringToggle ? "Open sidebar" : undefined}
         >
           {isCollapsed ? (
-            <Menu className="w-5 h-5 text-sidebar-foreground" />
+            isHoveringToggle ? (
+              <PanelLeft className="w-5 h-5 text-sidebar-foreground" />
+            ) : (
+              <span className="text-sidebar-foreground font-medium">F</span>
+            )
           ) : (
             <X className="w-5 h-5 text-sidebar-foreground" />
           )}
