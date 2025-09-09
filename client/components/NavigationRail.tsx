@@ -121,7 +121,15 @@ export function NavigationRail({
               <div
                 role="menu"
                 aria-label="Start new chat options"
-                className="absolute left-full top-0 ml-3 w-60 bg-card border border-border rounded-lg shadow-lg z-50 py-1"
+                ref={menuRef}
+                style={{
+                  position: 'fixed',
+                  left: menuPos ? `${menuPos.left}px` : 'auto',
+                  top: menuPos ? `${menuPos.top}px` : 'auto',
+                  width: '240px',
+                  zIndex: 9999,
+                }}
+                className="bg-card border border-border rounded-lg shadow-lg py-1"
               >
                 <button
                   role="menuitem"
