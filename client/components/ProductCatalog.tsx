@@ -128,6 +128,25 @@ export function ProductCatalog({ isOpen, onClose }: ProductCatalogProps) {
     },
   ];
 
+  const [selectedItems, setSelectedItems] = React.useState<{
+    section: string;
+    index: number;
+    title: string;
+    price: string;
+    image: string;
+  }[]>([]);
+  const [bucketOpen, setBucketOpen] = React.useState(false);
+
+  const updateSelection = (section: string, index: number | null, product?: { title: string; price: string; image: string }) => {
+    setSelectedItems((prev) => {
+      // remove existing selection for the section
+      const filtered = prev.filter((p) => p.section !== section);
+      if (index === null || !product) return filtered; // deselect
+      // add new selection
+      return [...filtered, { section, index, title: product.title, price: product.price, image: product.image }];
+    });
+  };
+
   const ProductSection = ({
     title,
     products,
@@ -137,16 +156,33 @@ export function ProductCatalog({ isOpen, onClose }: ProductCatalogProps) {
   }) => {
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const itemRefs = React.useRef<HTMLDivElement[]>([]);
-    const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
+    const initial = selectedItems.find((s) => s.section === title)?.index ?? null;
+    const [selectedIndex, setSelectedIndex] = React.useState<number | null>(initial);
+
+    React.useEffect(() => {
+      // sync with parent selectedItems when it changes
+      const idx = selectedItems.find((s) => s.section === title)?.index ?? null;
+      setSelectedIndex(idx);
+    }, [selectedItems, title]);
 
     const handleClick = (index: number) => {
-      setSelectedIndex(index);
+      // toggle selection
+      const newIndex = selectedIndex === index ? null : index;
+      setSelectedIndex(newIndex);
+
       const item = itemRefs.current[index];
       const container = containerRef.current;
       if (item && container) {
         const itemCenter = item.offsetLeft + item.offsetWidth / 2;
         const scrollLeft = Math.max(0, itemCenter - container.clientWidth / 2);
         container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+      }
+
+      if (newIndex === null) {
+        updateSelection(title, null);
+      } else {
+        const prod = products[index];
+        updateSelection(title, index, prod);
       }
     };
 
