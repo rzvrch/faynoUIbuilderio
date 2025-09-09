@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { NavigationRail } from "../components/NavigationRail";
 import { ChatArea } from "../components/ChatArea";
 import { MessageInput } from "../components/MessageInput";
+import { FloatingActionButton } from "../components/FloatingActionButton";
+import { ProductCatalog } from "../components/ProductCatalog";
 import { ChatMessageProps } from "../components/ChatMessage";
 
 export default function Index() {
