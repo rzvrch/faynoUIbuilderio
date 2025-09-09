@@ -5,6 +5,7 @@ interface ProductCardProps {
   price: string;
   image: string;
   onClick?: () => void;
+  selected?: boolean;
 }
 
 export function ProductCard({
@@ -12,11 +13,16 @@ export function ProductCard({
   price,
   image,
   onClick,
+  selected = false,
 }: ProductCardProps) {
   return (
     <div
-      className="flex flex-col items-start gap-2 flex-shrink-0 w-[165px] h-[180px] bg-[#ECE6F0] rounded-xl cursor-pointer hover:bg-[#E1D8E8] transition-colors relative"
+      className={
+        "flex flex-col items-start gap-2 flex-shrink-0 w-[165px] h-[180px] rounded-xl cursor-pointer transition-colors relative " +
+        (selected ? 'ring-2 ring-primary scale-[1.02]' : 'bg-[#ECE6F0] hover:bg-[#E1D8E8]')
+      }
       onClick={onClick}
+      aria-pressed={selected}
     >
       <div className="relative w-full h-full overflow-hidden rounded-lg">
         <img src={image} alt={title} className="w-full h-full object-cover" />
