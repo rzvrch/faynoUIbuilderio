@@ -89,7 +89,7 @@ export function NavigationRail({
           onMouseLeave={() => setIsHoveringToggle(false)}
           className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors flex flex-col items-center"
           aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-          title={isCollapsed && isHoveringToggle ? "Open sidebar" : undefined}
+          title="Open sidebar"
         >
           {isCollapsed ? (
             isHoveringToggle ? (
