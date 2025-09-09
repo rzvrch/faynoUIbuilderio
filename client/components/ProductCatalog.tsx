@@ -263,7 +263,11 @@ export function ProductCatalog({ isOpen, onClose }: ProductCatalogProps) {
         {/* Action Buttons */}
         <div className="p-6 border-t bg-white">
           <div className="flex flex-wrap gap-2 justify-end">
-            <button className="flex items-center min-h-[44px] px-4 py-2 bg-[#FCF8F5] text-[#4A4459] rounded-[20px] hover:bg-[#F5F1EC] transition-colors">
+            <button
+              onClick={() => setBucketOpen(true)}
+              disabled={selectedItems.length === 0}
+              className={"flex items-center min-h-[44px] px-4 py-2 rounded-[20px] transition-colors " + (selectedItems.length === 0 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-[#FCF8F5] text-[#4A4459] hover:bg-[#F5F1EC]')}
+            >
               <span className="text-base leading-6 tracking-[0.5px]">
                 Put in the bucket selected items
               </span>
@@ -280,6 +284,69 @@ export function ProductCatalog({ isOpen, onClose }: ProductCatalogProps) {
             </button>
           </div>
         </div>
+
+        {/* Bucket Modal */}
+        {bucketOpen && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[300] p-4">
+            <div className="bg-white rounded-[20px] w-full max-w-[600px] max-h-[80vh] overflow-auto p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold">Bucket ({selectedItems.length})</h3>
+                <button onClick={() => setBucketOpen(false)} className="p-2 rounded-full hover:bg-gray-100">
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {selectedItems.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">No items selected</p>
+                ) : (
+                  selectedItems.map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-4">
+                      <img src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded-md" />
+                      <div className="flex-1">
+                        <div className="font-medium text-sm">{item.title}</div>
+                        <div className="text-xs text-[#49454F]">{item.price}</div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              <div className="mt-6 border-t pt-4 flex items-center justify-between">
+                <div>
+                  <div className="text-sm text-[#49454F]">Total</div>
+                  <div className="text-xl font-semibold">{(() => {
+                    const total = selectedItems.reduce((sum, it) => {
+                      const n = Number(String(it.price).replace(/[^0-9.-]+/g, '')) || 0;
+                      return sum + n;
+                    }, 0);
+                    return total + ' uah';
+                  })()}</div>
+                </div>
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      // simulate moving to Zara bucket
+                      alert(`Moved ${selectedItems.length} items to Zara bucket`);
+                      setSelectedItems([]);
+                      setBucketOpen(false);
+                    }}
+                    className="px-4 py-2 bg-primary text-white rounded-md"
+                  >
+                    Move selected items to Zara bucket
+                  </button>
+                  <button
+                    onClick={() => setBucketOpen(false)}
+                    className="px-4 py-2 bg-gray-100 rounded-md"
+                  >
+                    Back to look creation
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
