@@ -134,30 +134,69 @@ export function ProductCatalog({ isOpen, onClose }: ProductCatalogProps) {
   }: {
     title: string;
     products: typeof topBodyProducts;
-  }) => (
-    <div className="flex flex-col gap-4">
-      {/* Section Title */}
-      <div className="flex justify-center items-center h-[30px] px-4">
-        <h3 className="text-[#1D1B20] font-roboto text-base font-medium leading-6 tracking-[0.15px]">
-          {title}
-        </h3>
-      </div>
+  }) => {
+    const containerRef = React.useRef<HTMLDivElement | null>(null);
+    const itemRefs = React.useRef<HTMLDivElement[]>([]);
+    const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
 
-      {/* Product Carousel */}
-      <div className="overflow-x-auto scrollbar-hide">
-        <div className="flex gap-2 px-4 pb-4 min-w-max">
-          {products.map((product, index) => (
-            <ProductCard
-              key={index}
-              title={product.title}
-              price={product.price}
-              image={product.image}
-            />
-          ))}
+    const handleClick = (index: number) => {
+      setSelectedIndex(index);
+      const item = itemRefs.current[index];
+      const container = containerRef.current;
+      if (item && container) {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const scrollLeft = Math.max(0, itemCenter - container.clientWidth / 2);
+        container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+      }
+    };
+
+    const handleMouseLeave = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      const idxToCenter = selectedIndex ?? 0; // default to first visible item
+      const item = itemRefs.current[idxToCenter];
+      if (item) {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const scrollLeft = Math.max(0, itemCenter - container.clientWidth / 2);
+        container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+        setSelectedIndex((prev) => (prev === null ? idxToCenter : prev));
+      }
+    };
+
+    return (
+      <div className="flex flex-col gap-4">
+        {/* Section Title */}
+        <div className="flex justify-center items-center h-[30px] px-4">
+          <h3 className="text-[#1D1B20] font-roboto text-base font-medium leading-6 tracking-[0.15px]">
+            {title}
+          </h3>
+        </div>
+
+        {/* Product Carousel */}
+        <div className="overflow-x-auto scrollbar-hide" ref={containerRef} onMouseLeave={handleMouseLeave}>
+          <div className="flex gap-2 px-4 pb-4 min-w-max">
+            {products.map((product, index) => (
+              <div
+                key={index}
+                ref={(el) => {
+                  if (el) itemRefs.current[index] = el;
+                }}
+                className="flex-shrink-0"
+                onClick={() => handleClick(index)}
+              >
+                <ProductCard
+                  title={product.title}
+                  price={product.price}
+                  image={product.image}
+                  selected={selectedIndex === index}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[200] p-4">
