@@ -76,24 +76,50 @@ export function NavigationRail({
       <div className="flex-1 p-4">
         <div className="space-y-2">
           {/* Add New Chat Button */}
-          <button
-            onClick={onNewChat}
-            title="Start new chat"
-            aria-label="Start new chat"
-            className={cn(
-              "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors",
-              isCollapsed && "justify-center"
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={toggleMenu}
+              title="Start new chat"
+              aria-label="Start new chat"
+              aria-expanded={menuOpen}
+              className={cn(
+                "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors",
+                isCollapsed && "justify-center"
+              )}
+            >
+              <div className="flex items-center justify-center w-6 h-6">
+                <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              {!isCollapsed && (
+                <span className="text-primary font-medium">Add New Chat</span>
+              )}
+            </button>
+
+            {menuOpen && (
+              <div
+                role="menu"
+                aria-label="Start new chat options"
+                className="absolute left-full top-0 ml-3 w-60 bg-card border border-border rounded-lg shadow-lg z-50 py-1"
+              >
+                <button
+                  role="menuitem"
+                  onClick={handleImageSearch}
+                  className="w-full text-left px-4 py-2 hover:bg-muted rounded-t-lg"
+                >
+                  Search by image reference
+                </button>
+                <button
+                  role="menuitem"
+                  onClick={handleFaynoChat}
+                  className="w-full text-left px-4 py-2 hover:bg-muted rounded-b-lg"
+                >
+                  Search by chat with Fayno stylist assistant
+                </button>
+              </div>
             )}
-          >
-            <div className="flex items-center justify-center w-6 h-6">
-              <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            {!isCollapsed && (
-              <span className="text-primary font-medium">Add New Chat</span>
-            )}
-          </button>
+          </div>
 
           {/* Chat Item - Active */}
           <div
