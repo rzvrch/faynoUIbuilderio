@@ -74,9 +74,13 @@ export function NavigationRail({
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
         {!isCollapsed && (
-          <h1 className="text-lg font-medium text-sidebar-foreground">
-            Chat Assistant
-          </h1>
+          <div className="flex items-center gap-3 flex-1 py-[18px] px-4 rounded-full">
+            <div className="flex items-center gap-3">
+              <div className="text-[22px] font-medium leading-7 tracking-[0px] text-[#49454F] font-roboto">
+                FAYNO
+              </div>
+            </div>
+          </div>
         )}
         <button
           onClick={onToggle}
