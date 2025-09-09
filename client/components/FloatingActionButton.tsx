@@ -1,13 +1,16 @@
-import React from 'react';
-import { ShoppingBag } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { ShoppingBag } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface FloatingActionButtonProps {
   onClick: () => void;
   className?: string;
 }
 
-export function FloatingActionButton({ onClick, className }: FloatingActionButtonProps) {
+export function FloatingActionButton({
+  onClick,
+  className,
+}: FloatingActionButtonProps) {
   return (
     <button
       onClick={onClick}
@@ -16,7 +19,7 @@ export function FloatingActionButton({ onClick, className }: FloatingActionButto
         "rounded-full shadow-lg hover:shadow-xl transition-all duration-200",
         "flex items-center justify-center z-[100]",
         "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-        className
+        className,
       )}
       aria-label="Open product catalog"
     >
