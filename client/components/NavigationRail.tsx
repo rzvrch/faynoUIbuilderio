@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageCircle, Menu, X } from "lucide-react";
+import { MessageCircle, Menu, X, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavigationRailProps {
@@ -8,6 +8,7 @@ interface NavigationRailProps {
   onNewChat?: () => void;
   onSearchByImage?: () => void;
   onStartFaynoChat?: () => void;
+  onLogout?: () => void;
 }
 
 export function NavigationRail({
@@ -16,6 +17,7 @@ export function NavigationRail({
   onNewChat = () => {},
   onSearchByImage = () => {},
   onStartFaynoChat = () => {},
+  onLogout = () => {},
 }: NavigationRailProps) { // navigation rail component
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -143,25 +145,41 @@ export function NavigationRail({
       <div className="p-4 border-t border-sidebar-border">
         <div
           className={cn(
-            "flex items-center gap-3",
-            isCollapsed && "justify-center",
+            "flex items-center gap-3 w-full",
+            isCollapsed ? "justify-center" : "justify-between",
           )}
         >
-          <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
-            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground text-sm font-medium">
-                U
-              </span>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                <span className="text-primary-foreground text-sm font-medium">
+                  U
+                </span>
+              </div>
             </div>
+            {!isCollapsed && (
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-sidebar-foreground truncate">
+                  User
+                </p>
+                <p className="text-xs text-sidebar-foreground/60 truncate">
+                  Online
+                </p>
+              </div>
+            )}
           </div>
+
           {!isCollapsed && (
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-sidebar-foreground truncate">
-                User
-              </p>
-              <p className="text-xs text-sidebar-foreground/60 truncate">
-                Online
-              </p>
+            <div className="ml-3">
+              <button
+                onClick={onLogout}
+                title="Log out"
+                aria-label="Log out"
+                className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted transition-colors text-sm"
+              >
+                <LogOut className="w-4 h-4 text-sidebar-foreground" />
+                <span className="text-sidebar-foreground">Log out</span>
+              </button>
             </div>
           )}
         </div>
