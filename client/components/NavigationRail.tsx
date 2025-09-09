@@ -73,7 +73,7 @@ export function NavigationRail({
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-center p-4 m-auto ml-0">
+      <div className="flex items-center justify-center p-4 m-auto">
         {!isCollapsed && (
           <div className="flex items-center rounded-full basis-0 flex-grow gap-3 py-[18px] px-4">
             <div className="flex items-center gap-3">
