@@ -9,6 +9,7 @@ import { ChatMessageProps } from "../components/ChatMessage";
 export default function Index() {
   const [isRailCollapsed, setIsRailCollapsed] = useState(true); // Start collapsed on mobile
   const [isMobile, setIsMobile] = useState(false);
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
 
   // Handle responsive behavior
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Index() {
   const [messages, setMessages] = useState<ChatMessageProps[]>([
     {
       message:
-        "Мені цікаво, які твої можливості по підбору одягу і відображення вибраних позицій у чаті. Можеш зробити приклади на основі одягу зі сайту Zara. підбери мені цілісний образ на вечерю із дівчиною у ресторані",
+        "Мені цікаво, які твої можливості по підбору одягу і відображення вибраних позицій у чаті. Можеш зробити прикл��ди на основі одягу зі сайту Zara. підбери мені цілісний образ на вечерю із дівчиною у ресторані",
       type: "sent",
       timestamp: "12:34",
     },
