@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -6,13 +7,42 @@ interface NavigationRailProps {
   isCollapsed?: boolean;
   onToggle?: () => void;
   onNewChat?: () => void;
+  onSearchByImage?: () => void;
+  onStartFaynoChat?: () => void;
 }
 
 export function NavigationRail({
   isCollapsed = false,
   onToggle,
   onNewChat = () => {},
-}: NavigationRailProps) {
+  onSearchByImage = () => {},
+  onStartFaynoChat = () => {},
+}: NavigationRailProps) { // navigation rail component
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const toggleMenu = () => setMenuOpen((v) => !v);
+
+  useEffect(() => {
+    function handleDocClick(e: MouseEvent) {
+      if (!menuRef.current) return;
+      if (e.target instanceof Node && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleDocClick);
+    return () => document.removeEventListener('mousedown', handleDocClick);
+  }, []);
+
+  const handleImageSearch = () => {
+    setMenuOpen(false);
+    onSearchByImage();
+  };
+
+  const handleFaynoChat = () => {
+    setMenuOpen(false);
+    onStartFaynoChat();
+  };
+
   return (
     <div
       className={cn(
