@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import { MessageCircle, Menu, X, LogOut, PanelLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -18,24 +18,31 @@ export function NavigationRail({
   onSearchByImage = () => {},
   onStartFaynoChat = () => {},
   onLogout = () => {},
-}: NavigationRailProps) { // navigation rail component
+}: NavigationRailProps) {
+  // navigation rail component
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const [menuPos, setMenuPos] = useState<{ left: number; top: number } | null>(null);
+  const [menuPos, setMenuPos] = useState<{ left: number; top: number } | null>(
+    null,
+  );
   const toggleMenu = () => setMenuOpen((v) => !v);
   const [isHoveringToggle, setIsHoveringToggle] = useState(false);
 
   useEffect(() => {
     function handleDocClick(e: MouseEvent) {
       const target = e.target as Node;
-      if (menuRef.current && (menuRef.current.contains(target) || (buttonRef.current && buttonRef.current.contains(target)))) {
+      if (
+        menuRef.current &&
+        (menuRef.current.contains(target) ||
+          (buttonRef.current && buttonRef.current.contains(target)))
+      ) {
         return;
       }
       setMenuOpen(false);
     }
-    document.addEventListener('mousedown', handleDocClick);
-    return () => document.removeEventListener('mousedown', handleDocClick);
+    document.addEventListener("mousedown", handleDocClick);
+    return () => document.removeEventListener("mousedown", handleDocClick);
   }, []);
 
   useEffect(() => {
@@ -95,7 +102,9 @@ export function NavigationRail({
             isHoveringToggle ? (
               <PanelLeft className="w-5 h-5 text-sidebar-foreground" />
             ) : (
-              <span className="block text-[#424A52] text-[20px] font-medium">F</span>
+              <span className="block text-[#424A52] text-[20px] font-medium">
+                F
+              </span>
             )
           ) : (
             <X className="w-5 h-5 text-sidebar-foreground" />
@@ -116,12 +125,24 @@ export function NavigationRail({
               aria-expanded={menuOpen}
               className={cn(
                 "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors",
-                isCollapsed && "justify-center"
+                isCollapsed && "justify-center",
               )}
             >
               <div className="flex items-center justify-center w-6 h-6">
-                <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                  <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  className="w-6 h-6 text-primary"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden
+                >
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
               {!isCollapsed && (
@@ -135,10 +156,10 @@ export function NavigationRail({
                 aria-label="Start new chat options"
                 ref={menuRef}
                 style={{
-                  position: 'fixed',
-                  left: menuPos ? `${menuPos.left}px` : 'auto',
-                  top: menuPos ? `${menuPos.top}px` : 'auto',
-                  width: '240px',
+                  position: "fixed",
+                  left: menuPos ? `${menuPos.left}px` : "auto",
+                  top: menuPos ? `${menuPos.top}px` : "auto",
+                  width: "240px",
                   zIndex: 9999,
                 }}
                 className="bg-card border border-border rounded-lg shadow-lg py-1"

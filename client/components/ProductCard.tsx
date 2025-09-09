@@ -19,7 +19,9 @@ export function ProductCard({
     <div
       className={
         "flex flex-col items-start gap-2 flex-shrink-0 w-[165px] h-[180px] rounded-xl cursor-pointer transition-colors relative " +
-        (selected ? 'ring-2 ring-primary scale-[1.02]' : 'bg-[#ECE6F0] hover:bg-[#E1D8E8]')
+        (selected
+          ? "ring-2 ring-primary scale-[1.02]"
+          : "bg-[#ECE6F0] hover:bg-[#E1D8E8]")
       }
       onClick={onClick}
       aria-pressed={selected}
