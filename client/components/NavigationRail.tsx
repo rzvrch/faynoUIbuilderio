@@ -11,6 +11,7 @@ interface NavigationRailProps {
 export function NavigationRail({
   isCollapsed = false,
   onToggle,
+  onNewChat = () => {},
 }: NavigationRailProps) {
   return (
     <div
