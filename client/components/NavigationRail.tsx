@@ -21,18 +21,36 @@ export function NavigationRail({
 }: NavigationRailProps) { // navigation rail component
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const [menuPos, setMenuPos] = useState<{ left: number; top: number } | null>(null);
   const toggleMenu = () => setMenuOpen((v) => !v);
 
   useEffect(() => {
     function handleDocClick(e: MouseEvent) {
-      if (!menuRef.current) return;
-      if (e.target instanceof Node && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false);
+      const target = e.target as Node;
+      if (menuRef.current && (menuRef.current.contains(target) || (buttonRef.current && buttonRef.current.contains(target)))) {
+        return;
       }
+      setMenuOpen(false);
     }
     document.addEventListener('mousedown', handleDocClick);
     return () => document.removeEventListener('mousedown', handleDocClick);
   }, []);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      setMenuPos(null);
+      return;
+    }
+    // compute button position and set menuPos for fixed positioning
+    const btn = buttonRef.current;
+    if (btn) {
+      const rect = btn.getBoundingClientRect();
+      const left = rect.right + 12; // 12px gap
+      const top = rect.top;
+      setMenuPos({ left, top });
+    }
+  }, [menuOpen]);
 
   const handleImageSearch = () => {
     setMenuOpen(false);
