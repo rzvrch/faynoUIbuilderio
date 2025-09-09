@@ -97,6 +97,7 @@ export function NavigationRail({
           {/* Add New Chat Button */}
           <div className="relative" ref={menuRef}>
             <button
+              ref={buttonRef}
               onClick={toggleMenu}
               title="Start new chat"
               aria-label="Start new chat"
