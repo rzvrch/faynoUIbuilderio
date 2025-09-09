@@ -43,6 +43,26 @@ export function NavigationRail({
       {/* Navigation Items */}
       <div className="flex-1 p-4">
         <div className="space-y-2">
+          {/* Add New Chat Button */}
+          <button
+            onClick={onNewChat}
+            title="Start new chat"
+            aria-label="Start new chat"
+            className={cn(
+              "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors",
+              isCollapsed && "justify-center"
+            )}
+          >
+            <div className="flex items-center justify-center w-6 h-6">
+              <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            {!isCollapsed && (
+              <span className="text-primary font-medium">Add New Chat</span>
+            )}
+          </button>
+
           {/* Chat Item - Active */}
           <div
             className={cn(
