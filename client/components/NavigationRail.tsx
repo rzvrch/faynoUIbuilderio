@@ -73,7 +73,7 @@ export function NavigationRail({
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
+      <div className="flex items-center justify-between p-4 border-b border-sidebar-border mx-auto">
         {!isCollapsed && (
           <div className="flex items-center gap-3 flex-1 py-[18px] px-4 rounded-full">
             <div className="flex items-center gap-3">
@@ -87,7 +87,7 @@ export function NavigationRail({
           onClick={onToggle}
           onMouseEnter={() => setIsHoveringToggle(true)}
           onMouseLeave={() => setIsHoveringToggle(false)}
-          className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors"
+          className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors flex flex-col items-center"
           aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           title={isCollapsed && isHoveringToggle ? "Open sidebar" : undefined}
         >
@@ -95,7 +95,7 @@ export function NavigationRail({
             isHoveringToggle ? (
               <PanelLeft className="w-5 h-5 text-sidebar-foreground" />
             ) : (
-              <span className="text-sidebar-foreground font-medium">FAYNO</span>
+              <span className="text-sidebar-foreground font-medium text-[20px] mx-auto">F</span>
             )
           ) : (
             <X className="w-5 h-5 text-sidebar-foreground" />
@@ -104,7 +104,7 @@ export function NavigationRail({
       </div>
 
       {/* Navigation Items */}
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4 ml-auto flex flex-col justify-start items-center">
         <div className="space-y-2">
           {/* Add New Chat Button */}
           <div className="relative" ref={menuRef}>
