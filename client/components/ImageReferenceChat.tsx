@@ -195,12 +195,12 @@ export function ImageReferenceChat({
           ))}
         </div>
 
-        <div className="border-t border-border px-4 py-3 bg-popover flex items-center gap-3">
+        <div className="bg-popover flex items-center gap-3" style={{ padding: '12px 16px 16px', border: '0px 0px 0px solid rgb(229, 231, 235)' }}>
           <input
             ref={fileInputRef}
             type="file"
             accept="image/*"
-            className="hidden"
+            style={{ display: 'none' }}
             onChange={onFileChange}
           />
 
@@ -219,12 +219,12 @@ export function ImageReferenceChat({
                 handleSubmit();
               }
             }}
-            className="flex-1 px-3 py-2 rounded-md border border-border bg-card"
+            className="flex-1 p-3 rounded-md border border-border bg-card"
           />
 
           <button
             onClick={handleSubmit}
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md"
+            className="px-4 py-3 bg-primary text-primary-foreground rounded-md"
             aria-label="Send message"
           >
             Start chat
