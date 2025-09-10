@@ -62,8 +62,12 @@ export function ChatArea({
         {messages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
-              <h3 className="text-lg font-medium text-foreground mb-2">Welcome to Chat Assistant</h3>
-              <p className="text-muted-foreground">Start a conversation by typing a message below.</p>
+              <h3 className="text-lg font-medium text-foreground mb-2">
+                Welcome to Chat Assistant
+              </h3>
+              <p className="text-muted-foreground">
+                Start a conversation by typing a message below.
+              </p>
             </div>
           </div>
         ) : (

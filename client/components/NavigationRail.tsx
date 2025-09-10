@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { MessageCircle, Menu, ChevronLeft, LogOut, PanelLeft, Folder, FolderOpen } from "lucide-react";
+import {
+  MessageCircle,
+  Menu,
+  ChevronLeft,
+  LogOut,
+  PanelLeft,
+  Folder,
+  FolderOpen,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavigationRailProps {
@@ -117,7 +125,9 @@ export function NavigationRail({
             isHoveringToggle ? (
               <PanelLeft className="w-5 h-5 text-sidebar-foreground" />
             ) : (
-              <span className="block text-[#424A52] text-[20px] font-medium">F</span>
+              <span className="block text-[#424A52] text-[20px] font-medium">
+                F
+              </span>
             )
           ) : (
             <ChevronLeft className="w-5 h-5 text-sidebar-foreground" />
@@ -170,7 +180,9 @@ export function NavigationRail({
                   </svg>
                 </div>
                 {!isCollapsed && (
-                  <span className="text-primary font-medium">Discover new outfit</span>
+                  <span className="text-primary font-medium">
+                    Discover new outfit
+                  </span>
                 )}
               </button>
 
@@ -207,7 +219,12 @@ export function NavigationRail({
             </div>
 
             {/* Chat Item - Active */}
-            <div className={cn("flex flex-col gap-1 w-full", isCollapsed ? "items-center" : "items-start") }>
+            <div
+              className={cn(
+                "flex flex-col gap-1 w-full",
+                isCollapsed ? "items-center" : "items-start",
+              )}
+            >
               <div
                 className={cn(
                   "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors w-full",
@@ -215,8 +232,16 @@ export function NavigationRail({
                 )}
               >
                 <button
-                  title={chatFolderOpen ? "Close chats history" : "Open chats history"}
-                  aria-label={chatFolderOpen ? "Close chats history" : "Open chats history"}
+                  title={
+                    chatFolderOpen
+                      ? "Close chats history"
+                      : "Open chats history"
+                  }
+                  aria-label={
+                    chatFolderOpen
+                      ? "Close chats history"
+                      : "Open chats history"
+                  }
                   aria-expanded={chatFolderOpen}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -232,7 +257,9 @@ export function NavigationRail({
                 </button>
 
                 {!isCollapsed && (
-                  <span className="text-sidebar-accent-foreground font-medium">Chats history</span>
+                  <span className="text-sidebar-accent-foreground font-medium">
+                    Chats history
+                  </span>
                 )}
               </div>
 
@@ -272,13 +299,19 @@ export function NavigationRail({
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
               <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground text-sm font-medium">U</span>
+                <span className="text-primary-foreground text-sm font-medium">
+                  U
+                </span>
               </div>
             </div>
             {!isCollapsed && (
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-sidebar-foreground truncate">User</p>
-                <p className="text-xs text-sidebar-foreground/60 truncate">Online</p>
+                <p className="text-sm font-medium text-sidebar-foreground truncate">
+                  User
+                </p>
+                <p className="text-xs text-sidebar-foreground/60 truncate">
+                  Online
+                </p>
               </div>
             )}
           </div>

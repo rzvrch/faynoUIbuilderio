@@ -25,7 +25,9 @@ export default function Index() {
   const [autoFocusChatId, setAutoFocusChatId] = useState<string | null>(null);
 
   // Messages per chat id
-  const [messagesMap, setMessagesMap] = useState<Record<string, ChatMessageProps[]>>({
+  const [messagesMap, setMessagesMap] = useState<
+    Record<string, ChatMessageProps[]>
+  >({
     "bali-vacation": [
       {
         message:
@@ -69,7 +71,10 @@ export default function Index() {
       };
       setMessagesMap((prev) => {
         const prevMessages = prev[selectedChatId] ?? [];
-        return { ...prev, [selectedChatId]: [...prevMessages, assistantResponse] };
+        return {
+          ...prev,
+          [selectedChatId]: [...prevMessages, assistantResponse],
+        };
       });
     }, 1000);
   };
@@ -164,10 +169,17 @@ export default function Index() {
         )}
 
         {/* Chat Messages */}
-        <ChatArea messages={messagesMap[selectedChatId] ?? []} chatName={chats.find((c) => c.id === selectedChatId)?.title} />
+        <ChatArea
+          messages={messagesMap[selectedChatId] ?? []}
+          chatName={chats.find((c) => c.id === selectedChatId)?.title}
+        />
 
         {/* Message Input */}
-        <MessageInput onSendMessage={handleSendMessage} autoFocus={selectedChatId === autoFocusChatId} onAutoFocusDone={() => setAutoFocusChatId(null)} />
+        <MessageInput
+          onSendMessage={handleSendMessage}
+          autoFocus={selectedChatId === autoFocusChatId}
+          onAutoFocusDone={() => setAutoFocusChatId(null)}
+        />
       </div>
 
       {/* Floating Action Button */}
