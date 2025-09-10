@@ -28,13 +28,13 @@ export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProp
   return (
     <div className="flex-1 flex flex-col h-full">
       {/* Top Bar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-white/90 backdrop-blur">
+      <div className="flex items-center justify-between px-4 py-3 bg-white/90 backdrop-blur" style={{ border: "1px solid rgba(243, 243, 243, 1)" }}>
         <h2 className="text-base sm:text-lg font-medium text-foreground truncate">
           {chatName}
         </h2>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" aria-label="Open menu">
+            <Button variant="ghost" size="icon" aria-label="Open menu" style={{ backgroundColor: "rgb(228, 214, 255)", borderRadius: 6 }}>
               <MoreVertical className="w-5 h-5" />
             </Button>
           </DropdownMenuTrigger>
