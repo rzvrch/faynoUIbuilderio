@@ -103,6 +103,8 @@ export default function Index() {
         isCollapsed={isRailCollapsed}
         onToggle={toggleRail}
         onSearchByImage={() => setIsImageChatOpen(true)}
+        selectedChatId={selectedChatId}
+        onSelectChat={(id: string) => setSelectedChatId(id)}
       />
 
       {/* Main Chat Area */}
