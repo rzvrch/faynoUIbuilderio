@@ -108,7 +108,7 @@ export function ImageReferenceChat({
         className="relative w-full max-w-2xl h-[80vh] bg-card border border-border rounded-lg shadow-lg flex flex-col overflow-hidden"
       >
         <header className="flex items-center justify-between px-4 py-3 border-b border-border">
-          <div className="text-lg font-medium">Image Reference Chat</div>
+          <div className="text-lg font-medium ml-[1px]">Upload image reference with your notes</div>
           <div className="flex items-center gap-2">
             <button
               onClick={openFilePicker}
@@ -140,7 +140,14 @@ export function ImageReferenceChat({
               className={"max-w-full"}
             >
               {m.type === "system" && (
-                <div className="bg-muted p-4 rounded-lg text-sm leading-relaxed">{m.text}</div>
+                <div className="bg-muted p-4 rounded-lg text-sm leading-relaxed">
+                  {String(m.text).split(/\n/).map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      <br />
+                    </React.Fragment>
+                  ))}
+                </div>
               )}
 
               {m.type === "sent" && (
@@ -184,8 +191,6 @@ export function ImageReferenceChat({
             }}
             className="flex-1 px-3 py-2 rounded-md border border-border bg-card"
           />
-
-          <button onClick={openFilePicker} className="px-3 py-2 bg-primary-container text-primary rounded-md" aria-label="Pick an image file">📁</button>
 
           <button onClick={handleSubmit} className="px-4 py-2 bg-primary text-primary-foreground rounded-md" aria-label="Send message">Send</button>
         </div>
