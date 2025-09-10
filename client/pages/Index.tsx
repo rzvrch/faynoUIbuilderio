@@ -11,6 +11,7 @@ export default function Index() {
   const [isRailCollapsed, setIsRailCollapsed] = useState(true); // Start collapsed on mobile
   const [isMobile, setIsMobile] = useState(false);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [isImageChatOpen, setIsImageChatOpen] = useState(false);
 
   // Handle responsive behavior
   useEffect(() => {
@@ -128,6 +129,9 @@ export default function Index() {
       </div>
 
       {/* Floating Action Button */}
+      {isImageChatOpen && (
+        <ImageReferenceChat userName={"Roman Z."} onClose={() => setIsImageChatOpen(false)} />
+      )}
       <FloatingActionButton onClick={() => setIsCatalogOpen(true)} />
 
       {/* Product Catalog Modal */}
