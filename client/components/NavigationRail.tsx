@@ -9,6 +9,7 @@ import {
   FolderOpen,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { UserProfile } from "./UserProfile";
 
 interface NavigationRailProps {
   isCollapsed?: boolean;
@@ -43,6 +44,7 @@ export function NavigationRail({
   const toggleMenu = () => setMenuOpen((v) => !v);
   const [isHoveringToggle, setIsHoveringToggle] = useState(false);
   const [chatFolderOpen, setChatFolderOpen] = useState(false);
+  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
 
   useEffect(() => {
     function handleDocClick(e: MouseEvent) {
@@ -86,6 +88,7 @@ export function NavigationRail({
   };
 
   return (
+    <>
     <div
       className={cn(
         "flex flex-col h-full bg-sidebar transition-all duration-300 ease-in-out",
@@ -303,7 +306,10 @@ export function NavigationRail({
             isCollapsed ? "justify-center" : "justify-between",
           )}
         >
-          <div className="flex items-center gap-3">
+          <div
+            className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={() => setIsUserProfileOpen(true)}
+          >
             <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
               <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
                 <span className="text-primary-foreground text-sm font-medium">
@@ -339,5 +345,13 @@ export function NavigationRail({
         </div>
       </div>
     </div>
-  );
+
+    {/* User Profile Modal */}
+    <UserProfile
+      isOpen={isUserProfileOpen}
+      onClose={() => setIsUserProfileOpen(false)}
+      userName="Roman Zvarych"
+    />
+  </>
+);
 }
