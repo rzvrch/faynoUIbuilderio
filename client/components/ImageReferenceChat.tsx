@@ -30,7 +30,10 @@ export function ImageReferenceChat({
   useEffect(() => {
     // auto-scroll when messages change
     if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+      lastMessageRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
     }
   }, [messages]);
 
@@ -108,7 +111,9 @@ export function ImageReferenceChat({
         className="relative w-full max-w-2xl h-[80vh] bg-card border border-border rounded-lg shadow-lg flex flex-col overflow-hidden"
       >
         <header className="flex items-center justify-between px-4 py-3 border-b border-border">
-          <div className="text-lg font-medium ml-[1px]">Upload image reference with your notes</div>
+          <div className="text-lg font-medium ml-[1px]">
+            Upload image reference with your notes
+          </div>
           <div className="flex items-center gap-2">
             <button
               onClick={openFilePicker}
@@ -141,33 +146,48 @@ export function ImageReferenceChat({
             >
               {m.type === "system" && (
                 <div className="bg-muted p-4 rounded-lg text-sm leading-relaxed">
-                  {String(m.text).split(/\n/).map((line, i) => (
-                    <React.Fragment key={i}>
-                      {line}
-                      <br />
-                    </React.Fragment>
-                  ))}
+                  {String(m.text)
+                    .split(/\n/)
+                    .map((line, i) => (
+                      <React.Fragment key={i}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
                 </div>
               )}
 
               {m.type === "sent" && (
                 <div className="text-right">
-                  <div className="inline-block bg-primary text-primary-foreground px-3 py-2 rounded-lg">{m.text}</div>
+                  <div className="inline-block bg-primary text-primary-foreground px-3 py-2 rounded-lg">
+                    {m.text}
+                  </div>
                 </div>
               )}
 
               {m.type === "received" && (
                 <div className="text-left">
-                  <div className="inline-block bg-card border border-border px-3 py-2 rounded-lg">{m.text}</div>
+                  <div className="inline-block bg-card border border-border px-3 py-2 rounded-lg">
+                    {m.text}
+                  </div>
                 </div>
               )}
 
               {m.type === "image" && m.url && (
                 <div className="flex items-center gap-3">
-                  <img src={m.url} alt="Uploaded reference" className="w-28 h-28 object-cover rounded-md shadow-sm transition-opacity duration-300" />
+                  <img
+                    src={m.url}
+                    alt="Uploaded reference"
+                    className="w-28 h-28 object-cover rounded-md shadow-sm transition-opacity duration-300"
+                  />
                   <div className="flex-1">
-                    <div className="text-sm text-muted-foreground">Reference photo</div>
-                    <div className="text-xs text-foreground/70 mt-1">You can upload another image or add style preferences below.</div>
+                    <div className="text-sm text-muted-foreground">
+                      Reference photo
+                    </div>
+                    <div className="text-xs text-foreground/70 mt-1">
+                      You can upload another image or add style preferences
+                      below.
+                    </div>
                   </div>
                 </div>
               )}
@@ -176,11 +196,21 @@ export function ImageReferenceChat({
         </div>
 
         <div className="border-t border-border px-4 py-3 bg-popover flex items-center gap-3">
-          <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={onFileChange} />
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={onFileChange}
+          />
 
           <input
             aria-label="Upload image or type your style preferences"
-            placeholder={hasImage ? "Add more notes or preferences..." : "Upload a photo or type your style preferences..."}
+            placeholder={
+              hasImage
+                ? "Add more notes or preferences..."
+                : "Upload a photo or type your style preferences..."
+            }
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
@@ -192,7 +222,13 @@ export function ImageReferenceChat({
             className="flex-1 px-3 py-2 rounded-md border border-border bg-card"
           />
 
-          <button onClick={handleSubmit} className="px-4 py-2 bg-primary text-primary-foreground rounded-md" aria-label="Send message">Send</button>
+          <button
+            onClick={handleSubmit}
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md"
+            aria-label="Send message"
+          >
+            Send
+          </button>
         </div>
       </div>
     </div>

@@ -102,7 +102,9 @@ export function NavigationRail({
             isHoveringToggle ? (
               <PanelLeft className="w-5 h-5 text-sidebar-foreground" />
             ) : (
-              <span className="block text-[#424A52] text-[20px] font-medium">F</span>
+              <span className="block text-[#424A52] text-[20px] font-medium">
+                F
+              </span>
             )
           ) : (
             <X className="w-5 h-5 text-sidebar-foreground" />
@@ -135,10 +137,18 @@ export function NavigationRail({
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden
                   >
-                    <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M12 5v14M5 12h14"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
-                {!isCollapsed && <span className="text-primary font-medium">Add New Chat</span>}
+                {!isCollapsed && (
+                  <span className="text-primary font-medium">Add New Chat</span>
+                )}
               </button>
 
               {menuOpen && (
@@ -155,18 +165,39 @@ export function NavigationRail({
                   }}
                   className="bg-card border border-border rounded-lg shadow-lg py-1"
                 >
-                  <button role="menuitem" onClick={handleImageSearch} className="w-full text-left px-4 py-2 hover:bg-muted rounded-t-lg">Search by image reference</button>
-                  <button role="menuitem" onClick={handleFaynoChat} className="w-full text-left px-4 py-2 hover:bg-muted rounded-b-lg">Search by chat with Fayno stylist assistant</button>
+                  <button
+                    role="menuitem"
+                    onClick={handleImageSearch}
+                    className="w-full text-left px-4 py-2 hover:bg-muted rounded-t-lg"
+                  >
+                    Search by image reference
+                  </button>
+                  <button
+                    role="menuitem"
+                    onClick={handleFaynoChat}
+                    className="w-full text-left px-4 py-2 hover:bg-muted rounded-b-lg"
+                  >
+                    Search by chat with Fayno stylist assistant
+                  </button>
                 </div>
               )}
             </div>
 
             {/* Chat Item - Active */}
-            <div className={cn("flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors", isCollapsed && "justify-center")}>
+            <div
+              className={cn(
+                "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors",
+                isCollapsed && "justify-center",
+              )}
+            >
               <div className="flex items-center justify-center w-6 h-6">
                 <MessageCircle className="w-6 h-6 text-sidebar-accent-foreground" />
               </div>
-              {!isCollapsed && <span className="text-sidebar-accent-foreground font-medium">Chat</span>}
+              {!isCollapsed && (
+                <span className="text-sidebar-accent-foreground font-medium">
+                  Chat
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -174,22 +205,40 @@ export function NavigationRail({
 
       {/* User Avatar */}
       <div className="p-4">
-        <div className={cn("flex items-center gap-3 w-full", isCollapsed ? "justify-center" : "justify-between")}>
+        <div
+          className={cn(
+            "flex items-center gap-3 w-full",
+            isCollapsed ? "justify-center" : "justify-between",
+          )}
+        >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
-              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center"><span className="text-primary-foreground text-sm font-medium">U</span></div>
+              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                <span className="text-primary-foreground text-sm font-medium">
+                  U
+                </span>
+              </div>
             </div>
             {!isCollapsed && (
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-sidebar-foreground truncate">User</p>
-                <p className="text-xs text-sidebar-foreground/60 truncate">Online</p>
+                <p className="text-sm font-medium text-sidebar-foreground truncate">
+                  User
+                </p>
+                <p className="text-xs text-sidebar-foreground/60 truncate">
+                  Online
+                </p>
               </div>
             )}
           </div>
 
           {!isCollapsed && (
             <div className="ml-3">
-              <button onClick={onLogout} title="Log out" aria-label="Log out" className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted transition-colors text-sm">
+              <button
+                onClick={onLogout}
+                title="Log out"
+                aria-label="Log out"
+                className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted transition-colors text-sm"
+              >
                 <LogOut className="w-4 h-4 text-sidebar-foreground" />
                 <span className="text-sidebar-foreground">Log out</span>
               </button>

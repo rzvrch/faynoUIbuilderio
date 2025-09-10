@@ -91,7 +91,11 @@ export default function Index() {
       )}
 
       {/* Navigation Rail */}
-      <NavigationRail isCollapsed={isRailCollapsed} onToggle={toggleRail} onSearchByImage={() => setIsImageChatOpen(true)} />
+      <NavigationRail
+        isCollapsed={isRailCollapsed}
+        onToggle={toggleRail}
+        onSearchByImage={() => setIsImageChatOpen(true)}
+      />
 
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col min-w-0 relative">
@@ -130,7 +134,10 @@ export default function Index() {
 
       {/* Floating Action Button */}
       {isImageChatOpen && (
-        <ImageReferenceChat userName={"Roman Z."} onClose={() => setIsImageChatOpen(false)} />
+        <ImageReferenceChat
+          userName={"Roman Z."}
+          onClose={() => setIsImageChatOpen(false)}
+        />
       )}
       <FloatingActionButton onClick={() => setIsCatalogOpen(true)} />
 
