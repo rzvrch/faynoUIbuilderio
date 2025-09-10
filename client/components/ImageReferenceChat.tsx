@@ -109,58 +109,55 @@ export function ImageReferenceChat({
     [handleFiles],
   );
 
-  const analyzeImage = useCallback(
-    (file: File | null, notes: string) => {
-      const clothingKeywords = [
-        "dress",
-        "shirt",
-        "pants",
-        "trousers",
-        "jacket",
-        "coat",
-        "skirt",
-        "blouse",
-        "top",
-        "suit",
-        "jeans",
-        "sweater",
-        "hoodie",
-        "tee",
-        "t-shirt",
-        "shorts",
-        "sneakers",
-        "shoes",
-        "heels",
-        "boots",
-        "outfit",
-        "look",
-        "ensemble",
-        "vest",
-        "cardigan",
-      ];
+  const analyzeImage = useCallback((file: File | null, notes: string) => {
+    const clothingKeywords = [
+      "dress",
+      "shirt",
+      "pants",
+      "trousers",
+      "jacket",
+      "coat",
+      "skirt",
+      "blouse",
+      "top",
+      "suit",
+      "jeans",
+      "sweater",
+      "hoodie",
+      "tee",
+      "t-shirt",
+      "shorts",
+      "sneakers",
+      "shoes",
+      "heels",
+      "boots",
+      "outfit",
+      "look",
+      "ensemble",
+      "vest",
+      "cardigan",
+    ];
 
-      const lowerNotes = notes?.toLowerCase() ?? "";
-      const name = file?.name?.toLowerCase() ?? "";
+    const lowerNotes = notes?.toLowerCase() ?? "";
+    const name = file?.name?.toLowerCase() ?? "";
 
-      const foundInName = clothingKeywords.some((k) => name.includes(k));
-      const foundInNotes = clothingKeywords.some((k) => lowerNotes.includes(k));
+    const foundInName = clothingKeywords.some((k) => name.includes(k));
+    const foundInNotes = clothingKeywords.some((k) => lowerNotes.includes(k));
 
-      const relevant = foundInName || foundInNotes;
+    const relevant = foundInName || foundInNotes;
 
-      let items: string[] = [];
-      clothingKeywords.forEach((k) => {
-        if (lowerNotes.includes(k) || name.includes(k)) items.push(k);
-      });
-      if (items.length === 0) items = ["an outfit"];
+    let items: string[] = [];
+    clothingKeywords.forEach((k) => {
+      if (lowerNotes.includes(k) || name.includes(k)) items.push(k);
+    });
+    if (items.length === 0) items = ["an outfit"];
 
-      const summary = relevant
-        ? `I examined the photo and it appears to show ${items.join(", ")}. ${notes ? `Notes: ${notes}` : ""}`
-        : `I couldn't confidently identify clothing items in the photo. ${notes ? `Notes: ${notes}` : "If this is a clothing photo, try adding a short note like 'dress', 'jacket' or 'shoes' to help me."}`;
+    const summary = relevant
+      ? `I examined the photo and it appears to show ${items.join(", ")}. ${notes ? `Notes: ${notes}` : ""}`
+      : `I couldn't confidently identify clothing items in the photo. ${notes ? `Notes: ${notes}` : "If this is a clothing photo, try adding a short note like 'dress', 'jacket' or 'shoes' to help me."}`;
 
-      return { relevant, summary };
-    },
-    [],
-  );
+    return { relevant, summary };
+  }, []);
 
   const handleSubmit = useCallback(() => {
     if (lastFile) {
@@ -171,11 +168,19 @@ export function ImageReferenceChat({
           onCreateFaynoChat(summary, imageUrl);
           return;
         }
-        pushMessage({ id: `analysis-${Date.now()}`, type: "received", text: summary });
+        pushMessage({
+          id: `analysis-${Date.now()}`,
+          type: "received",
+          text: summary,
+        });
         return;
       }
 
-      pushMessage({ id: `analysis-${Date.now()}`, type: "received", text: summary });
+      pushMessage({
+        id: `analysis-${Date.now()}`,
+        type: "received",
+        text: summary,
+      });
       return;
     }
 
@@ -201,7 +206,9 @@ export function ImageReferenceChat({
         className="relative w-full max-w-2xl h-[80vh] bg-card border border-border rounded-lg shadow-lg flex flex-col overflow-hidden"
       >
         <header className="flex items-center justify-between px-4 py-3 border-b border-border">
-          <div className="text-lg font-medium ml-[1px]">Upload image reference with your notes</div>
+          <div className="text-lg font-medium ml-[1px]">
+            Upload image reference with your notes
+          </div>
           <div className="flex items-center gap-2">
             <button
               onClick={openFilePicker}
@@ -210,21 +217,41 @@ export function ImageReferenceChat({
             >
               Upload
             </button>
-            <button onClick={onClose} className="px-3 py-1 bg-muted rounded-md" aria-label="Close chat">
+            <button
+              onClick={onClose}
+              className="px-3 py-1 bg-muted rounded-md"
+              aria-label="Close chat"
+            >
               Close
             </button>
           </div>
         </header>
 
-        <div ref={containerRef} onDrop={onDrop} onDragOver={onDragOver} className="flex-1 overflow-auto p-4 space-y-4 bg-background">
+        <div
+          ref={containerRef}
+          onDrop={onDrop}
+          onDragOver={onDragOver}
+          className="flex-1 overflow-auto p-4 space-y-4 bg-background"
+        >
           {messages.map((m, idx) => (
-            <div key={m.id} ref={idx === messages.length - 1 ? lastMessageRef : undefined} className={"max-w-full"}>
+            <div
+              key={m.id}
+              ref={idx === messages.length - 1 ? lastMessageRef : undefined}
+              className={"max-w-full"}
+            >
               {m.type === "system" && (
                 <div className="bg-muted p-4 rounded-lg text-sm leading-relaxed">
                   {String(m.text)
                     .split(/\n\n/)
                     .map((para, idx, arr) => (
-                      <div key={idx} style={{ fontSize: "16px", marginBottom: idx < arr.length - 1 ? "0.5rem" : undefined }}>
+                      <div
+                        key={idx}
+                        style={{
+                          fontSize: "16px",
+                          marginBottom:
+                            idx < arr.length - 1 ? "0.5rem" : undefined,
+                        }}
+                      >
                         {para.split(/\n/).map((line, i) => (
                           <React.Fragment key={i}>
                             {line}
@@ -238,27 +265,45 @@ export function ImageReferenceChat({
 
               {m.type === "sent" && (
                 <div className="text-right">
-                  <div className="inline-block bg-primary text-primary-foreground px-3 py-2 rounded-lg">{m.text}</div>
+                  <div className="inline-block bg-primary text-primary-foreground px-3 py-2 rounded-lg">
+                    {m.text}
+                  </div>
                 </div>
               )}
 
               {m.type === "received" && (
                 <div className="text-left">
-                  <div className="inline-block bg-card border border-border px-3 py-2 rounded-lg">{m.text}</div>
+                  <div className="inline-block bg-card border border-border px-3 py-2 rounded-lg">
+                    {m.text}
+                  </div>
                 </div>
               )}
 
               {m.type === "image" && m.url && (
                 <div className="flex items-center gap-3 relative">
                   <div className="relative">
-                    <img src={m.url} alt="Uploaded reference" className="w-28 h-28 object-cover rounded-md shadow-sm transition-opacity duration-300" />
-                    <button aria-label="Delete image" title="Delete image" onClick={() => handleDeleteImage(m.id, m.url)} className="absolute top-2 right-2 bg-white rounded-full p-1 shadow hover:bg-muted transition-colors">
+                    <img
+                      src={m.url}
+                      alt="Uploaded reference"
+                      className="w-28 h-28 object-cover rounded-md shadow-sm transition-opacity duration-300"
+                    />
+                    <button
+                      aria-label="Delete image"
+                      title="Delete image"
+                      onClick={() => handleDeleteImage(m.id, m.url)}
+                      className="absolute top-2 right-2 bg-white rounded-full p-1 shadow hover:bg-muted transition-colors"
+                    >
                       <X className="w-4 h-4 text-muted-foreground" />
                     </button>
                   </div>
                   <div className="flex-1">
-                    <div className="text-sm text-muted-foreground">Reference photo</div>
-                    <div className="text-xs text-foreground/70 mt-1">You can upload another image or add style preferences below.</div>
+                    <div className="text-sm text-muted-foreground">
+                      Reference photo
+                    </div>
+                    <div className="text-xs text-foreground/70 mt-1">
+                      You can upload another image or add style preferences
+                      below.
+                    </div>
                   </div>
                 </div>
               )}
@@ -266,12 +311,28 @@ export function ImageReferenceChat({
           ))}
         </div>
 
-        <div className="bg-popover flex items-center gap-3" style={{ padding: "12px 16px 16px", border: "0px 0px 0px solid rgb(229, 231, 235)" }}>
-          <input ref={fileInputRef} type="file" accept="image/*" style={{ display: "none" }} onChange={onFileChange} />
+        <div
+          className="bg-popover flex items-center gap-3"
+          style={{
+            padding: "12px 16px 16px",
+            border: "0px 0px 0px solid rgb(229, 231, 235)",
+          }}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={onFileChange}
+          />
 
           <input
             aria-label="Upload image or type your style preferences"
-            placeholder={hasImage ? "Let us know what’s special you see on this look" : "Let us know what’s special you see on this look"}
+            placeholder={
+              hasImage
+                ? "Let us know what’s special you see on this look"
+                : "Let us know what’s special you see on this look"
+            }
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
@@ -283,7 +344,11 @@ export function ImageReferenceChat({
             className="flex-1 p-3 rounded-md border border-border bg-card"
           />
 
-          <button onClick={handleSubmit} className="px-4 py-3 bg-primary text-primary-foreground rounded-md" aria-label="Send message">
+          <button
+            onClick={handleSubmit}
+            className="px-4 py-3 bg-primary text-primary-foreground rounded-md"
+            aria-label="Send message"
+          >
             Detect outfit
           </button>
         </div>
