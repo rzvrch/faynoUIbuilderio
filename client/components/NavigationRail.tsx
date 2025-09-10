@@ -166,7 +166,7 @@ export function NavigationRail({
                   </svg>
                 </div>
                 {!isCollapsed && (
-                  <span className="text-primary font-medium">Add New Chat</span>
+                  <span className="text-primary font-medium">Discover new outfit</span>
                 )}
               </button>
 
