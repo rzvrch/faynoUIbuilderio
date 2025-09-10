@@ -39,13 +39,13 @@ export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProp
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <DropdownMenuItem>
               Complete chat
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <DropdownMenuItem>
               Save chat
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <DropdownMenuItem>
               Report problem
             </DropdownMenuItem>
           </DropdownMenuContent>
