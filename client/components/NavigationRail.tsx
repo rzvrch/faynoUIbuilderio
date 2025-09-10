@@ -115,7 +115,7 @@ export function NavigationRail({
               </span>
             )
           ) : (
-            <X className="w-5 h-5 text-sidebar-foreground" />
+            <ChevronLeft className="w-5 h-5 text-sidebar-foreground" />
           )}
         </button>
       </div>
