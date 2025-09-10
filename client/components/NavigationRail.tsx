@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MessageCircle, Menu, X, LogOut, PanelLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
