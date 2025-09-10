@@ -116,89 +116,89 @@ export function NavigationRail({
       <div className="flex-1 p-4 mr-auto flex flex-col justify-start items-start">
         <div className="space-y-2">
           <div className="flex flex-col mr-auto">
-          {/* Add New Chat Button */}
-          <div className="relative" ref={menuRef}>
-            <button
-              ref={buttonRef}
-              onClick={toggleMenu}
-              title="Start new chat"
-              aria-label="Start new chat"
-              aria-expanded={menuOpen}
+            {/* Add New Chat Button */}
+            <div className="relative" ref={menuRef}>
+              <button
+                ref={buttonRef}
+                onClick={toggleMenu}
+                title="Start new chat"
+                aria-label="Start new chat"
+                aria-expanded={menuOpen}
+                className={cn(
+                  "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors",
+                  isCollapsed && "justify-center",
+                )}
+              >
+                <div className="flex items-center justify-center w-6 h-6">
+                  <svg
+                    className="w-6 h-6 text-primary"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden
+                  >
+                    <path
+                      d="M12 5v14M5 12h14"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+                {!isCollapsed && (
+                  <span className="text-primary font-medium">Add New Chat</span>
+                )}
+              </button>
+
+              {menuOpen && (
+                <div
+                  role="menu"
+                  aria-label="Start new chat options"
+                  ref={menuRef}
+                  style={{
+                    position: "fixed",
+                    left: menuPos ? `${menuPos.left}px` : "auto",
+                    top: menuPos ? `${menuPos.top}px` : "auto",
+                    width: "240px",
+                    zIndex: 9999,
+                  }}
+                  className="bg-card border border-border rounded-lg shadow-lg py-1"
+                >
+                  <button
+                    role="menuitem"
+                    onClick={handleImageSearch}
+                    className="w-full text-left px-4 py-2 hover:bg-muted rounded-t-lg"
+                  >
+                    Search by image reference
+                  </button>
+                  <button
+                    role="menuitem"
+                    onClick={handleFaynoChat}
+                    className="w-full text-left px-4 py-2 hover:bg-muted rounded-b-lg"
+                  >
+                    Search by chat with Fayno stylist assistant
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Chat Item - Active */}
+            <div
               className={cn(
-                "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors",
+                "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors",
                 isCollapsed && "justify-center",
               )}
             >
               <div className="flex items-center justify-center w-6 h-6">
-                <svg
-                  className="w-6 h-6 text-primary"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden
-                >
-                  <path
-                    d="M12 5v14M5 12h14"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <MessageCircle className="w-6 h-6 text-sidebar-accent-foreground" />
               </div>
               {!isCollapsed && (
-                <span className="text-primary font-medium">Add New Chat</span>
+                <span className="text-sidebar-accent-foreground font-medium">
+                  Chat
+                </span>
               )}
-            </button>
-
-            {menuOpen && (
-              <div
-                role="menu"
-                aria-label="Start new chat options"
-                ref={menuRef}
-                style={{
-                  position: "fixed",
-                  left: menuPos ? `${menuPos.left}px` : "auto",
-                  top: menuPos ? `${menuPos.top}px` : "auto",
-                  width: "240px",
-                  zIndex: 9999,
-                }}
-                className="bg-card border border-border rounded-lg shadow-lg py-1"
-              >
-                <button
-                  role="menuitem"
-                  onClick={handleImageSearch}
-                  className="w-full text-left px-4 py-2 hover:bg-muted rounded-t-lg"
-                >
-                  Search by image reference
-                </button>
-                <button
-                  role="menuitem"
-                  onClick={handleFaynoChat}
-                  className="w-full text-left px-4 py-2 hover:bg-muted rounded-b-lg"
-                >
-                  Search by chat with Fayno stylist assistant
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Chat Item - Active */}
-          <div
-            className={cn(
-              "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors",
-              isCollapsed && "justify-center",
-            )}
-          >
-            <div className="flex items-center justify-center w-6 h-6">
-              <MessageCircle className="w-6 h-6 text-sidebar-accent-foreground" />
             </div>
-            {!isCollapsed && (
-              <span className="text-sidebar-accent-foreground font-medium">
-                Chat
-              </span>
-            )}
-          </div>
           </div>
         </div>
       </div>
