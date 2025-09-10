@@ -26,7 +26,7 @@ export function ChatMessage({ message, type, timestamp }: ChatMessageProps) {
       >
         <p className="text-base leading-6 tracking-[0.5px]">{message}</p>
         {timestamp && (
-          <p className="text-xs text-muted-foreground mt-1 opacity-70">
+          <p className="hidden" data-timestamp={timestamp} aria-hidden="true">
             {timestamp}
           </p>
         )}
