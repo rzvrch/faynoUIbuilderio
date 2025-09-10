@@ -123,7 +123,7 @@ export function NavigationRail({
       {/* Navigation Items */}
       <div
         className={cn(
-          "flex-1 p-4 mr-auto flex flex-col justify-start items-start",
+          "flex-1 p-4 flex flex-col justify-start items-stretch",
           isCollapsed ? "cursor-pointer" : "",
         )}
         onClick={(e) => {
@@ -133,7 +133,7 @@ export function NavigationRail({
         }}
       >
         <div className="space-y-2">
-          <div className="flex flex-col mr-auto">
+          <div className="flex flex-col w-full">
             {/* Add New Chat Button */}
             <div className="relative" ref={menuRef}>
               <button
@@ -143,7 +143,7 @@ export function NavigationRail({
                 aria-label="Start new chat"
                 aria-expanded={menuOpen}
                 className={cn(
-                  "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors",
+                  "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors w-full",
                   isCollapsed && "justify-center",
                 )}
               >
@@ -204,7 +204,7 @@ export function NavigationRail({
             {/* Chat Item - Active */}
             <div
               className={cn(
-                "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors",
+                "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors w-full",
                 isCollapsed && "justify-center",
               )}
             >
