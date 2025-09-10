@@ -9,6 +9,8 @@ interface NavigationRailProps {
   onSearchByImage?: () => void;
   onStartFaynoChat?: () => void;
   onLogout?: () => void;
+  selectedChatId?: string;
+  onSelectChat?: (id: string) => void;
 }
 
 export function NavigationRail({
@@ -18,6 +20,8 @@ export function NavigationRail({
   onSearchByImage = () => {},
   onStartFaynoChat = () => {},
   onLogout = () => {},
+  selectedChatId,
+  onSelectChat = () => {},
 }: NavigationRailProps) {
   // navigation rail component
   const [menuOpen, setMenuOpen] = useState(false);
