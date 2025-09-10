@@ -167,7 +167,14 @@ export function ImageReferenceChat({
                   {String(m.text)
                     .split(/\n\n/)
                     .map((para, idx, arr) => (
-                      <div key={idx} style={{ fontSize: "16px", marginBottom: idx < arr.length - 1 ? "0.5rem" : undefined }}>
+                      <div
+                        key={idx}
+                        style={{
+                          fontSize: "16px",
+                          marginBottom:
+                            idx < arr.length - 1 ? "0.5rem" : undefined,
+                        }}
+                      >
                         {para.split(/\n/).map((line, i) => (
                           <React.Fragment key={i}>
                             {line}
@@ -227,12 +234,18 @@ export function ImageReferenceChat({
           ))}
         </div>
 
-        <div className="bg-popover flex items-center gap-3" style={{ padding: '12px 16px 16px', border: '0px 0px 0px solid rgb(229, 231, 235)' }}>
+        <div
+          className="bg-popover flex items-center gap-3"
+          style={{
+            padding: "12px 16px 16px",
+            border: "0px 0px 0px solid rgb(229, 231, 235)",
+          }}
+        >
           <input
             ref={fileInputRef}
             type="file"
             accept="image/*"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             onChange={onFileChange}
           />
 

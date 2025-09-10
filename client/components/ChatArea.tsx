@@ -14,7 +14,10 @@ interface ChatAreaProps {
   chatName?: string;
 }
 
-export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProps) {
+export function ChatArea({
+  messages,
+  chatName = "Chat Assistant",
+}: ChatAreaProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -28,7 +31,10 @@ export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProp
   return (
     <div className="flex-1 flex flex-col h-full">
       {/* Top Bar */}
-      <div className="flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/90 backdrop-blur transition-colors duration-150 ease-in-out" style={{ border: "1px solid rgba(243, 243, 243, 1)" }}>
+      <div
+        className="flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/90 backdrop-blur transition-colors duration-150 ease-in-out"
+        style={{ border: "1px solid rgba(243, 243, 243, 1)" }}
+      >
         <h2 className="text-base sm:text-lg font-medium text-foreground truncate">
           Let’s create your perfect Bali vacation outfit ✨
         </h2>
@@ -44,15 +50,9 @@ export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProp
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuItem>
-              Complete chat
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Save chat
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Report problem
-            </DropdownMenuItem>
+            <DropdownMenuItem>Complete chat</DropdownMenuItem>
+            <DropdownMenuItem>Save chat</DropdownMenuItem>
+            <DropdownMenuItem>Report problem</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
