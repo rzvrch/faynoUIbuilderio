@@ -245,6 +245,11 @@ export function NavigationRail({
                   aria-expanded={chatFolderOpen}
                   onClick={(e) => {
                     e.stopPropagation();
+                    // If sidebar is collapsed, open it instead of toggling folder
+                    if (isCollapsed) {
+                      onToggle?.();
+                      return;
+                    }
                     setChatFolderOpen((v) => !v);
                   }}
                   className="p-1 rounded-md hover:bg-muted transition-colors"
