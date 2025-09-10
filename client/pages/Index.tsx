@@ -44,6 +44,8 @@ export default function Index() {
 
   const handleSendMessage = (message: string) => {
     if (!selectedChatId) return;
+    const chatId = selectedChatId;
+
     const newMessage: ChatMessageProps = {
       message,
       type: "sent",
@@ -53,12 +55,59 @@ export default function Index() {
       }),
     };
 
+    // Add user's message
     setMessagesMap((prev) => {
-      const prevMessages = prev[selectedChatId] ?? [];
-      return { ...prev, [selectedChatId]: [...prevMessages, newMessage] };
+      const prevMessages = prev[chatId] ?? [];
+      return { ...prev, [chatId]: [...prevMessages, newMessage] };
     });
 
-    // Simulate assistant response after a brief delay
+    // Special handling for "cat" (case-insensitive)
+    if (message.trim().toLowerCase() === "cat") {
+      // Fetch a cat image and insert as part of the assistant's message
+      const prevMessages = messagesMap[chatId] ?? [];
+      fetch("https://cataas.com/cat")
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch cat image");
+          return res.blob();
+        })
+        .then((blob) => {
+          const url = URL.createObjectURL(blob);
+          const assistantMessage: ChatMessageProps = {
+            message: "Here's a cute cat for you 🐱",
+            type: "received",
+            imageUrl: url,
+            imageAlt: "Random cat from Cataas",
+            timestamp: new Date().toLocaleTimeString("uk-UA", {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+          };
+
+          setMessagesMap((prev) => {
+            const prevMessagesInner = prev[chatId] ?? [];
+            return { ...prev, [chatId]: [...prevMessagesInner, assistantMessage] };
+          });
+        })
+        .catch(() => {
+          const assistantMessage: ChatMessageProps = {
+            message: "Couldn't fetch a cat right now, but here's a virtual meow 🐾",
+            type: "received",
+            timestamp: new Date().toLocaleTimeString("uk-UA", {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+          };
+
+          setMessagesMap((prev) => {
+            const prevMessagesInner = prev[chatId] ?? [];
+            return { ...prev, [chatId]: [...prevMessagesInner, assistantMessage] };
+          });
+        });
+
+      return;
+    }
+
+    // Default assistant behavior
     setTimeout(() => {
       const assistantResponse: ChatMessageProps = {
         message:
@@ -70,10 +119,10 @@ export default function Index() {
         }),
       };
       setMessagesMap((prev) => {
-        const prevMessages = prev[selectedChatId] ?? [];
+        const prevMessages = prev[chatId] ?? [];
         return {
           ...prev,
-          [selectedChatId]: [...prevMessages, assistantResponse],
+          [chatId]: [...prevMessages, assistantResponse],
         };
       });
     }, 1000);
