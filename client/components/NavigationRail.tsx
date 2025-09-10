@@ -89,269 +89,269 @@ export function NavigationRail({
 
   return (
     <>
-    <div
-      className={cn(
-        "flex flex-col h-full bg-sidebar transition-all duration-300 ease-in-out",
-        // Mobile: sidebar is overlay when expanded, hidden when collapsed
-        "md:relative absolute inset-y-0 left-0 z-50 ml-auto",
-        isCollapsed ? "w-0 md:w-20 overflow-hidden" : "w-80 md:w-80",
-      )}
-      style={{ border: "1px solid rgba(243, 243, 243, 1)" }}
-    >
-      {/* Header */}
-      <div
-        className="flex items-center justify-center p-4 my-auto mx-0 cursor-pointer"
-        onClick={(e) => {
-          // only trigger when clicking the header itself, not inner buttons
-          if (e.target !== e.currentTarget) return;
-          onToggle?.();
-        }}
-      >
-        {!isCollapsed && (
-          <div className="flex items-center rounded-full basis-0 flex-grow gap-3 py-[18px] px-4">
-            <div className="flex items-center gap-3">
-              <div className="text-[22px] font-medium leading-7 tracking-[0px] text-[#49454F] font-roboto">
-                FAYNO
-              </div>
-            </div>
-          </div>
-        )}
-        <button
-          onClick={onToggle}
-          onMouseEnter={() => setIsHoveringToggle(true)}
-          onMouseLeave={() => setIsHoveringToggle(false)}
-          className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors flex flex-col items-center"
-          aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-          title="Open sidebar"
-        >
-          {isCollapsed ? (
-            isHoveringToggle ? (
-              <PanelLeft className="w-5 h-5 text-sidebar-foreground" />
-            ) : (
-              <span className="block text-[#424A52] text-[20px] font-medium">
-                F
-              </span>
-            )
-          ) : (
-            <ChevronLeft className="w-5 h-5 text-sidebar-foreground" />
-          )}
-        </button>
-      </div>
-
-      {/* Navigation Items */}
       <div
         className={cn(
-          "flex-1 p-4 flex flex-col justify-start items-stretch",
-          isCollapsed ? "cursor-pointer" : "",
+          "flex flex-col h-full bg-sidebar transition-all duration-300 ease-in-out",
+          // Mobile: sidebar is overlay when expanded, hidden when collapsed
+          "md:relative absolute inset-y-0 left-0 z-50 ml-auto",
+          isCollapsed ? "w-0 md:w-20 overflow-hidden" : "w-80 md:w-80",
         )}
-        onClick={(e) => {
-          // only trigger when clicking the container background itself
-          if (e.target !== e.currentTarget) return;
-          if (isCollapsed) onToggle?.();
-        }}
+        style={{ border: "1px solid rgba(243, 243, 243, 1)" }}
       >
-        <div className="space-y-2">
-          <div className="flex flex-col w-full">
-            {/* Add New Chat Button */}
-            <div className="relative" ref={menuRef}>
-              <button
-                ref={buttonRef}
-                onClick={toggleMenu}
-                title="Start new chat"
-                aria-label="Start new chat"
-                aria-expanded={menuOpen}
-                className={cn(
-                  "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors w-full",
-                  isCollapsed && "justify-center",
-                )}
-              >
-                <div className="flex items-center justify-center w-6 h-6">
-                  <svg
-                    className="w-6 h-6 text-primary"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden
-                  >
-                    <path
-                      d="M12 5v14M5 12h14"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+        {/* Header */}
+        <div
+          className="flex items-center justify-center p-4 my-auto mx-0 cursor-pointer"
+          onClick={(e) => {
+            // only trigger when clicking the header itself, not inner buttons
+            if (e.target !== e.currentTarget) return;
+            onToggle?.();
+          }}
+        >
+          {!isCollapsed && (
+            <div className="flex items-center rounded-full basis-0 flex-grow gap-3 py-[18px] px-4">
+              <div className="flex items-center gap-3">
+                <div className="text-[22px] font-medium leading-7 tracking-[0px] text-[#49454F] font-roboto">
+                  FAYNO
                 </div>
-                {!isCollapsed && (
-                  <span className="text-primary font-medium">
-                    Discover new outfit
-                  </span>
-                )}
-              </button>
-
-              {menuOpen && (
-                <div
-                  role="menu"
-                  aria-label="Start new chat options"
-                  ref={menuRef}
-                  style={{
-                    position: "fixed",
-                    left: menuPos ? `${menuPos.left}px` : "auto",
-                    top: menuPos ? `${menuPos.top}px` : "auto",
-                    width: "240px",
-                    zIndex: 9999,
-                  }}
-                  className="bg-card border border-border rounded-lg shadow-lg py-1"
-                >
-                  <button
-                    role="menuitem"
-                    onClick={handleImageSearch}
-                    className="w-full text-left px-4 py-2 hover:bg-muted rounded-t-lg"
-                  >
-                    Search by image reference
-                  </button>
-                  <button
-                    role="menuitem"
-                    onClick={handleFaynoChat}
-                    className="w-full text-left px-4 py-2 hover:bg-muted rounded-b-lg"
-                  >
-                    Search by chat with Fayno stylist assistant
-                  </button>
-                </div>
-              )}
+              </div>
             </div>
+          )}
+          <button
+            onClick={onToggle}
+            onMouseEnter={() => setIsHoveringToggle(true)}
+            onMouseLeave={() => setIsHoveringToggle(false)}
+            className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors flex flex-col items-center"
+            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            title="Open sidebar"
+          >
+            {isCollapsed ? (
+              isHoveringToggle ? (
+                <PanelLeft className="w-5 h-5 text-sidebar-foreground" />
+              ) : (
+                <span className="block text-[#424A52] text-[20px] font-medium">
+                  F
+                </span>
+              )
+            ) : (
+              <ChevronLeft className="w-5 h-5 text-sidebar-foreground" />
+            )}
+          </button>
+        </div>
 
-            {/* Chat Item - Active */}
-            <div
-              className={cn(
-                "flex flex-col gap-1 w-full",
-                isCollapsed ? "items-center" : "items-start",
-              )}
-            >
-              <div
-                className={cn(
-                  "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors w-full",
-                  isCollapsed && "justify-center",
-                )}
-              >
+        {/* Navigation Items */}
+        <div
+          className={cn(
+            "flex-1 p-4 flex flex-col justify-start items-stretch",
+            isCollapsed ? "cursor-pointer" : "",
+          )}
+          onClick={(e) => {
+            // only trigger when clicking the container background itself
+            if (e.target !== e.currentTarget) return;
+            if (isCollapsed) onToggle?.();
+          }}
+        >
+          <div className="space-y-2">
+            <div className="flex flex-col w-full">
+              {/* Add New Chat Button */}
+              <div className="relative" ref={menuRef}>
                 <button
-                  title={
-                    chatFolderOpen
-                      ? "Close chats history"
-                      : "Open chats history"
-                  }
-                  aria-label={
-                    chatFolderOpen
-                      ? "Close chats history"
-                      : "Open chats history"
-                  }
-                  aria-expanded={chatFolderOpen}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // If sidebar is collapsed, open it instead of toggling folder
-                    if (isCollapsed) {
-                      onToggle?.();
-                      return;
-                    }
-                    setChatFolderOpen((v) => !v);
-                  }}
-                  className="p-1 rounded-md hover:bg-muted transition-colors"
+                  ref={buttonRef}
+                  onClick={toggleMenu}
+                  title="Start new chat"
+                  aria-label="Start new chat"
+                  aria-expanded={menuOpen}
+                  className={cn(
+                    "flex items-center gap-3 p-3 rounded-[28px] hover:bg-primary-container transition-colors w-full",
+                    isCollapsed && "justify-center",
+                  )}
                 >
-                  {chatFolderOpen ? (
-                    <FolderOpen className="w-6 h-6 text-sidebar-accent-foreground" />
-                  ) : (
-                    <Folder className="w-6 h-6 text-sidebar-accent-foreground" />
+                  <div className="flex items-center justify-center w-6 h-6">
+                    <svg
+                      className="w-6 h-6 text-primary"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        d="M12 5v14M5 12h14"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  {!isCollapsed && (
+                    <span className="text-primary font-medium">
+                      Discover new outfit
+                    </span>
                   )}
                 </button>
 
-                {!isCollapsed && (
-                  <span className="text-sidebar-accent-foreground font-medium">
-                    Chats history
-                  </span>
+                {menuOpen && (
+                  <div
+                    role="menu"
+                    aria-label="Start new chat options"
+                    ref={menuRef}
+                    style={{
+                      position: "fixed",
+                      left: menuPos ? `${menuPos.left}px` : "auto",
+                      top: menuPos ? `${menuPos.top}px` : "auto",
+                      width: "240px",
+                      zIndex: 9999,
+                    }}
+                    className="bg-card border border-border rounded-lg shadow-lg py-1"
+                  >
+                    <button
+                      role="menuitem"
+                      onClick={handleImageSearch}
+                      className="w-full text-left px-4 py-2 hover:bg-muted rounded-t-lg"
+                    >
+                      Search by image reference
+                    </button>
+                    <button
+                      role="menuitem"
+                      onClick={handleFaynoChat}
+                      className="w-full text-left px-4 py-2 hover:bg-muted rounded-b-lg"
+                    >
+                      Search by chat with Fayno stylist assistant
+                    </button>
+                  </div>
                 )}
               </div>
 
-              {chatFolderOpen && (
-                <div className="pl-12 pr-4 w-full">
-                  {chats.map((chat) => (
-                    <button
-                      key={chat.id}
-                      onClick={() => onSelectChat(chat.id)}
-                      className={cn(
-                        "w-full text-left px-3 py-2 rounded-md hover:bg-muted text-sm",
-                        selectedChatId === chat.id
-                          ? isCollapsed
-                            ? "bg-transparent text-primary-foreground font-medium"
-                            : "bg-primary-container text-primary-foreground font-medium"
-                          : "text-foreground/90",
-                      )}
-                    >
-                      <span className="block w-full truncate whitespace-nowrap overflow-hidden bg-transparent">
-                        {chat.title}
-                      </span>
-                    </button>
-                  ))}
+              {/* Chat Item - Active */}
+              <div
+                className={cn(
+                  "flex flex-col gap-1 w-full",
+                  isCollapsed ? "items-center" : "items-start",
+                )}
+              >
+                <div
+                  className={cn(
+                    "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors w-full",
+                    isCollapsed && "justify-center",
+                  )}
+                >
+                  <button
+                    title={
+                      chatFolderOpen
+                        ? "Close chats history"
+                        : "Open chats history"
+                    }
+                    aria-label={
+                      chatFolderOpen
+                        ? "Close chats history"
+                        : "Open chats history"
+                    }
+                    aria-expanded={chatFolderOpen}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // If sidebar is collapsed, open it instead of toggling folder
+                      if (isCollapsed) {
+                        onToggle?.();
+                        return;
+                      }
+                      setChatFolderOpen((v) => !v);
+                    }}
+                    className="p-1 rounded-md hover:bg-muted transition-colors"
+                  >
+                    {chatFolderOpen ? (
+                      <FolderOpen className="w-6 h-6 text-sidebar-accent-foreground" />
+                    ) : (
+                      <Folder className="w-6 h-6 text-sidebar-accent-foreground" />
+                    )}
+                  </button>
+
+                  {!isCollapsed && (
+                    <span className="text-sidebar-accent-foreground font-medium">
+                      Chats history
+                    </span>
+                  )}
+                </div>
+
+                {chatFolderOpen && (
+                  <div className="pl-12 pr-4 w-full">
+                    {chats.map((chat) => (
+                      <button
+                        key={chat.id}
+                        onClick={() => onSelectChat(chat.id)}
+                        className={cn(
+                          "w-full text-left px-3 py-2 rounded-md hover:bg-muted text-sm",
+                          selectedChatId === chat.id
+                            ? isCollapsed
+                              ? "bg-transparent text-primary-foreground font-medium"
+                              : "bg-primary-container text-primary-foreground font-medium"
+                            : "text-foreground/90",
+                        )}
+                      >
+                        <span className="block w-full truncate whitespace-nowrap overflow-hidden bg-transparent">
+                          {chat.title}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* User Avatar */}
+        <div className="p-4">
+          <div
+            className={cn(
+              "flex items-center gap-3 w-full",
+              isCollapsed ? "justify-center" : "justify-between",
+            )}
+          >
+            <div
+              className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={() => setIsUserProfileOpen(true)}
+            >
+              <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+                <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                  <span className="text-primary-foreground text-sm font-medium">
+                    U
+                  </span>
+                </div>
+              </div>
+              {!isCollapsed && (
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-sidebar-foreground truncate">
+                    Roman Zvarych
+                  </p>
+                  <p className="text-xs text-sidebar-foreground/60 truncate">
+                    Online
+                  </p>
                 </div>
               )}
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* User Avatar */}
-      <div className="p-4">
-        <div
-          className={cn(
-            "flex items-center gap-3 w-full",
-            isCollapsed ? "justify-center" : "justify-between",
-          )}
-        >
-          <div
-            className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
-            onClick={() => setIsUserProfileOpen(true)}
-          >
-            <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
-              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground text-sm font-medium">
-                  U
-                </span>
-              </div>
-            </div>
             {!isCollapsed && (
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-sidebar-foreground truncate">
-                  Roman Zvarych
-                </p>
-                <p className="text-xs text-sidebar-foreground/60 truncate">
-                  Online
-                </p>
+              <div className="ml-3">
+                <button
+                  onClick={onLogout}
+                  title="Log out"
+                  aria-label="Log out"
+                  className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted transition-colors text-sm"
+                >
+                  <LogOut className="w-4 h-4 text-sidebar-foreground" />
+                  <span className="text-sidebar-foreground">Log out</span>
+                </button>
               </div>
             )}
           </div>
-
-          {!isCollapsed && (
-            <div className="ml-3">
-              <button
-                onClick={onLogout}
-                title="Log out"
-                aria-label="Log out"
-                className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted transition-colors text-sm"
-              >
-                <LogOut className="w-4 h-4 text-sidebar-foreground" />
-                <span className="text-sidebar-foreground">Log out</span>
-              </button>
-            </div>
-          )}
         </div>
       </div>
-    </div>
 
-    {/* User Profile Modal */}
-    <UserProfile
-      isOpen={isUserProfileOpen}
-      onClose={() => setIsUserProfileOpen(false)}
-      userName="Roman Zvarych"
-    />
-  </>
-);
+      {/* User Profile Modal */}
+      <UserProfile
+        isOpen={isUserProfileOpen}
+        onClose={() => setIsUserProfileOpen(false)}
+        userName="Roman Zvarych"
+      />
+    </>
+  );
 }
