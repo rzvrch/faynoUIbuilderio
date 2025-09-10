@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from "react";
-import React, { useRef, useEffect } from "react";
 import { ChatMessage, ChatMessageProps } from "./ChatMessage";
 
 interface ChatAreaProps {
@@ -24,23 +23,14 @@ export function ChatArea({ messages }: ChatAreaProps) {
         {messages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
-              <h3 className="text-lg font-medium text-foreground mb-2">
-                Welcome to Chat Assistant
-              </h3>
-              <p className="text-muted-foreground">
-                Start a conversation by typing a message below.
-              </p>
+              <h3 className="text-lg font-medium text-foreground mb-2">Welcome to Chat Assistant</h3>
+              <p className="text-muted-foreground">Start a conversation by typing a message below.</p>
             </div>
           </div>
         ) : (
           <>
             {messages.map((message, index) => (
-              <ChatMessage
-                key={index}
-                message={message.message}
-                type={message.type}
-                timestamp={message.timestamp}
-              />
+              <ChatMessage key={index} message={message.message} type={message.type} timestamp={message.timestamp} />
             ))}
             <div ref={messagesEndRef} />
           </>
