@@ -82,7 +82,7 @@ export function NavigationRail({
     >
       {/* Header */}
       <div
-        className="flex items-center justify-center p-4 m-auto cursor-pointer"
+        className="flex items-center justify-center p-4 my-auto mx-0 cursor-pointer"
         onClick={(e) => {
           // only trigger when clicking the header itself, not inner buttons
           if (e.target !== e.currentTarget) return;
