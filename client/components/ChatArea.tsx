@@ -28,13 +28,34 @@ export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProp
   return (
     <div className="flex-1 flex flex-col h-full">
       {/* Top Bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-white/90 backdrop-blur" style={{ border: "1px solid rgba(243, 243, 243, 1)" }}>
+      <div className="flex items-center justify-between px-6 py-4 bg-white/90 backdrop-blur" style={{ border: "1px solid rgba(243, 243, 243, 1)" }}>
         <h2 className="text-base sm:text-lg font-medium text-foreground truncate">
-          {chatName}
+          Let’s create your perfect Bali vacation outfit ✨
         </h2>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" aria-label="Open menu" style={{ backgroundColor: "rgb(228, 214, 255)", borderRadius: 6 }}>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Open menu"
+              style={{
+                backgroundColor: "rgb(228, 214, 255)",
+                borderRadius: 6,
+                fontSize: 14,
+                fontWeight: 500,
+                gap: 8,
+                height: 40,
+                width: 40,
+                justifyContent: "center",
+                lineHeight: "20px",
+                whiteSpace: "nowrap",
+                borderColor: "rgba(0, 0, 0, 0)",
+                transitionDuration: "0.15s",
+                transitionProperty:
+                  "color, background-color, border-color, text-decoration-color, fill, stroke",
+                transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+            >
               <MoreVertical className="w-5 h-5" />
             </Button>
           </DropdownMenuTrigger>
