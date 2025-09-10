@@ -39,7 +39,7 @@ export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProp
               size="icon"
               aria-label="Open menu"
               style={{
-                backgroundColor: "rgb(228, 214, 255)",
+                backgroundColor: "rgba(228, 214, 255, 0)",
                 borderRadius: 6,
                 fontSize: 14,
                 fontWeight: 500,
