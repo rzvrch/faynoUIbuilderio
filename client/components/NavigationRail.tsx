@@ -237,7 +237,9 @@ export function NavigationRail({
               {chatFolderOpen && (
                 <div className="pl-12 pr-4 w-full">
                   <button className="w-full text-left px-3 py-2 rounded-md hover:bg-muted text-sm text-foreground/90">
-                    Placeholder chat
+                    <span className="block w-full text-foreground truncate whitespace-nowrap overflow-hidden bg-white">
+                      Let’s create your perfect Bali vacation outfit ✨
+                    </span>
                   </button>
                 </div>
               )}
