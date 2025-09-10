@@ -81,7 +81,14 @@ export function NavigationRail({
       style={{ border: "1px solid rgba(243, 243, 243, 1)" }}
     >
       {/* Header */}
-      <div className="flex items-center justify-center p-4 m-auto">
+      <div
+        className="flex items-center justify-center p-4 m-auto cursor-pointer"
+        onClick={(e) => {
+          // only trigger when clicking the header itself, not inner buttons
+          if (e.target !== e.currentTarget) return;
+          onToggle?.();
+        }}
+      >
         {!isCollapsed && (
           <div className="flex items-center rounded-full basis-0 flex-grow gap-3 py-[18px] px-4">
             <div className="flex items-center gap-3">
