@@ -53,7 +53,7 @@ export function ImageReferenceChat({
         pushMessage({
           id: `confirm-${Date.now()}`,
           type: "received",
-          text: "Got it! Here’s your reference photo 📸",
+          text: "Got it! Here’s your reference photo to analyze",
         });
       }, 300);
     },
@@ -255,7 +255,7 @@ export function ImageReferenceChat({
             className="px-4 py-3 bg-primary text-primary-foreground rounded-md"
             aria-label="Send message"
           >
-            Start chat
+            Detect outfit
           </button>
         </div>
       </div>
