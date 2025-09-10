@@ -277,7 +277,9 @@ export function NavigationRail({
                       className={cn(
                         "w-full text-left px-3 py-2 rounded-md hover:bg-muted text-sm",
                         selectedChatId === chat.id
-                          ? "bg-primary-container text-primary-foreground font-medium"
+                          ? (isCollapsed
+                              ? "bg-transparent text-primary-foreground font-medium"
+                              : "bg-primary-container text-primary-foreground font-medium")
                           : "text-foreground/90",
                       )}
                     >
