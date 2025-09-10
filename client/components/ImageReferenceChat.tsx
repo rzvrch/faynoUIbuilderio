@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
-
 interface ImageMessage {
   id: string;
   type: "system" | "sent" | "received" | "image";
@@ -40,28 +38,34 @@ export function ImageReferenceChat({
     setMessages((prev) => [...prev, msg]);
   }, []);
 
-  const handleFiles = useCallback((file: File) => {
-    const url = URL.createObjectURL(file);
-    const id = `img-${Date.now()}`;
-    pushMessage({ id, type: "image", url });
-    setHasImage(true);
-    // confirmation
-    setTimeout(() => {
-      pushMessage({
-        id: `confirm-${Date.now()}`,
-        type: "received",
-        text: "Got it! Here’s your reference photo 📸",
-      });
-    }, 300);
-  }, [pushMessage]);
+  const handleFiles = useCallback(
+    (file: File) => {
+      const url = URL.createObjectURL(file);
+      const id = `img-${Date.now()}`;
+      pushMessage({ id, type: "image", url });
+      setHasImage(true);
+      // confirmation
+      setTimeout(() => {
+        pushMessage({
+          id: `confirm-${Date.now()}`,
+          type: "received",
+          text: "Got it! Here’s your reference photo 📸",
+        });
+      }, 300);
+    },
+    [pushMessage],
+  );
 
-  const onDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    const f = e.dataTransfer.files?.[0];
-    if (f && f.type.startsWith("image/")) {
-      handleFiles(f);
-    }
-  }, [handleFiles]);
+  const onDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      const f = e.dataTransfer.files?.[0];
+      if (f && f.type.startsWith("image/")) {
+        handleFiles(f);
+      }
+    },
+    [handleFiles],
+  );
 
   const onDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -71,12 +75,15 @@ export function ImageReferenceChat({
     fileInputRef.current?.click();
   }, []);
 
-  const onFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
-    if (f && f.type.startsWith("image/")) {
-      handleFiles(f);
-    }
-  }, [handleFiles]);
+  const onFileChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const f = e.target.files?.[0];
+      if (f && f.type.startsWith("image/")) {
+        handleFiles(f);
+      }
+    },
+    [handleFiles],
+  );
 
   const handleSubmit = useCallback(() => {
     if (!input.trim()) return;
@@ -130,39 +137,27 @@ export function ImageReferenceChat({
             <div
               key={m.id}
               ref={idx === messages.length - 1 ? lastMessageRef : undefined}
-              className={
-                "max-w-full"
-              }
+              className={"max-w-full"}
             >
               {m.type === "system" && (
-                <div className="bg-muted p-4 rounded-lg text-sm leading-relaxed">
-                  {m.text}
-                </div>
+                <div className="bg-muted p-4 rounded-lg text-sm leading-relaxed">{m.text}</div>
               )}
 
               {m.type === "sent" && (
                 <div className="text-right">
-                  <div className="inline-block bg-primary text-primary-foreground px-3 py-2 rounded-lg">
-                    {m.text}
-                  </div>
+                  <div className="inline-block bg-primary text-primary-foreground px-3 py-2 rounded-lg">{m.text}</div>
                 </div>
               )}
 
               {m.type === "received" && (
                 <div className="text-left">
-                  <div className="inline-block bg-card border border-border px-3 py-2 rounded-lg">
-                    {m.text}
-                  </div>
+                  <div className="inline-block bg-card border border-border px-3 py-2 rounded-lg">{m.text}</div>
                 </div>
               )}
 
               {m.type === "image" && m.url && (
                 <div className="flex items-center gap-3">
-                  <img
-                    src={m.url}
-                    alt="Uploaded reference"
-                    className="w-28 h-28 object-cover rounded-md shadow-sm transition-opacity duration-300"
-                  />
+                  <img src={m.url} alt="Uploaded reference" className="w-28 h-28 object-cover rounded-md shadow-sm transition-opacity duration-300" />
                   <div className="flex-1">
                     <div className="text-sm text-muted-foreground">Reference photo</div>
                     <div className="text-xs text-foreground/70 mt-1">You can upload another image or add style preferences below.</div>
@@ -174,13 +169,7 @@ export function ImageReferenceChat({
         </div>
 
         <div className="border-t border-border px-4 py-3 bg-popover flex items-center gap-3">
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={onFileChange}
-          />
+          <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={onFileChange} />
 
           <input
             aria-label="Upload image or type your style preferences"
@@ -196,21 +185,9 @@ export function ImageReferenceChat({
             className="flex-1 px-3 py-2 rounded-md border border-border bg-card"
           />
 
-          <button
-            onClick={openFilePicker}
-            className="px-3 py-2 bg-primary-container text-primary rounded-md"
-            aria-label="Pick an image file"
-          >
-            📁
-          </button>
+          <button onClick={openFilePicker} className="px-3 py-2 bg-primary-container text-primary rounded-md" aria-label="Pick an image file">📁</button>
 
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md"
-            aria-label="Send message"
-          >
-            Send
-          </button>
+          <button onClick={handleSubmit} className="px-4 py-2 bg-primary text-primary-foreground rounded-md" aria-label="Send message">Send</button>
         </div>
       </div>
     </div>
