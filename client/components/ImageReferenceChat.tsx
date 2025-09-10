@@ -161,12 +161,8 @@ export function ImageReferenceChat({
       if (items.length === 0) items = ["an outfit"];
 
       const summary = relevant
-        ? `I examined the photo and it appears to show ${items.join(", ")}. ${
-            notes ? `Notes: ${notes}` : ""
-          }`
-        : `I couldn't confidently identify clothing items in the photo. ${
-            notes ? `Notes: ${notes}` : "If this is a clothing photo, try adding a short note like 'dress', 'jacket' or 'shoes' to help me.`
-          }`;
+        ? `I examined the photo and it appears to show ${items.join(", ")}. ${notes ? `Notes: ${notes}` : ""}`
+        : `I couldn't confidently identify clothing items in the photo. ${notes ? `Notes: ${notes}` : "If this is a clothing photo, try adding a short note like 'dress', 'jacket' or 'shoes' to help me."}`;
 
       return { relevant, summary };
     },
