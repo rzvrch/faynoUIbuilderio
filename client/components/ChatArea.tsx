@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreVertical } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 
 interface ChatAreaProps {
   messages: ChatMessageProps[];
@@ -28,7 +28,7 @@ export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProp
   return (
     <div className="flex-1 flex flex-col h-full">
       {/* Top Bar */}
-      <div className="flex items-center justify-between px-6 py-4 bg-white/90 backdrop-blur" style={{ border: "1px solid rgba(243, 243, 243, 1)" }}>
+      <div className="flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/90 backdrop-blur transition-colors duration-150 ease-in-out" style={{ border: "1px solid rgba(243, 243, 243, 1)" }}>
         <h2 className="text-base sm:text-lg font-medium text-foreground truncate">
           Let’s create your perfect Bali vacation outfit ✨
         </h2>
@@ -56,7 +56,7 @@ export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProp
                 transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
               }}
             >
-              <MoreVertical className="w-5 h-5" />
+              <MoreHorizontal className="w-5 h-5" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
