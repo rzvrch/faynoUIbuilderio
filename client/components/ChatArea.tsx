@@ -38,23 +38,7 @@ export function ChatArea({ messages, chatName = "Chat Assistant" }: ChatAreaProp
               variant="ghost"
               size="icon"
               aria-label="Open menu"
-              style={{
-                backgroundColor: "rgba(228, 214, 255, 0)",
-                borderRadius: 6,
-                fontSize: 14,
-                fontWeight: 500,
-                gap: 8,
-                height: 40,
-                width: 40,
-                justifyContent: "center",
-                lineHeight: "20px",
-                whiteSpace: "nowrap",
-                borderColor: "rgba(0, 0, 0, 0)",
-                transitionDuration: "0.15s",
-                transitionProperty:
-                  "color, background-color, border-color, text-decoration-color, fill, stroke",
-                transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-              }}
+              className="bg-transparent hover:bg-muted transition-colors duration-150 ease-in-out focus-visible:outline-none focus-visible:ring-0 shadow-none border-0"
             >
               <MoreHorizontal className="w-5 h-5" />
             </Button>
