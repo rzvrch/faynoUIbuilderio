@@ -5,9 +5,11 @@ export interface ChatMessageProps {
   message: string;
   type: "sent" | "received";
   timestamp?: string;
+  imageUrl?: string;
+  imageAlt?: string;
 }
 
-export function ChatMessage({ message, type, timestamp }: ChatMessageProps) {
+export function ChatMessage({ message, type, timestamp, imageUrl, imageAlt }: ChatMessageProps) {
   return (
     <div
       className={cn(
@@ -24,7 +26,22 @@ export function ChatMessage({ message, type, timestamp }: ChatMessageProps) {
             : "bg-white text-on-surface-variant border border-border rounded-bl-[8px]",
         )}
       >
+        {/* If there's an image, render it above the text */}
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={imageAlt ?? "Random cat from Cataas"}
+            className="w-full max-h-80 object-cover rounded-md mb-2"
+            onError={(e) => {
+              // Hide broken images but keep the message text readable
+              const el = e.currentTarget as HTMLImageElement;
+              el.style.display = "none";
+            }}
+          />
+        )}
+
         <p className="text-base leading-6 tracking-[0.5px]">{message}</p>
+
         {timestamp && (
           <p className="hidden" data-timestamp={timestamp} aria-hidden="true">
             {timestamp}
