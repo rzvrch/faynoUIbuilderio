@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { ChatMessage, ChatMessageProps } from "./ChatMessage";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,7 +36,7 @@ export function ChatArea({
         style={{ border: "1px solid rgba(243, 243, 243, 1)" }}
       >
         <h2 className="text-base sm:text-lg font-medium text-foreground truncate">
-          Let’s create your perfect Bali vacation outfit ✨
+          {chatName}
         </h2>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -62,12 +62,8 @@ export function ChatArea({
         {messages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
-              <h3 className="text-lg font-medium text-foreground mb-2">
-                Welcome to Chat Assistant
-              </h3>
-              <p className="text-muted-foreground">
-                Start a conversation by typing a message below.
-              </p>
+              <h3 className="text-lg font-medium text-foreground mb-2">Welcome to Chat Assistant</h3>
+              <p className="text-muted-foreground">Start a conversation by typing a message below.</p>
             </div>
           </div>
         ) : (
@@ -80,9 +76,11 @@ export function ChatArea({
                 timestamp={message.timestamp}
               />
             ))}
-            <div ref={messagesEndRef} />
           </>
         )}
+
+        {/* Always render the end ref so we can scroll to it even when there are no messages */}
+        <div ref={messagesEndRef} />
       </div>
     </div>
   );

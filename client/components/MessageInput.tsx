@@ -1,4 +1,4 @@
-import React, { useState, KeyboardEvent } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Send, Image } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -6,14 +6,30 @@ interface MessageInputProps {
   onSendMessage: (message: string) => void;
   placeholder?: string;
   disabled?: boolean;
+  autoFocus?: boolean;
+  onAutoFocusDone?: () => void;
 }
 
 export function MessageInput({
   onSendMessage,
   placeholder = "Let us know what a look are you looking for?",
   disabled = false,
+  autoFocus = false,
+  onAutoFocusDone,
 }: MessageInputProps) {
   const [message, setMessage] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    if (autoFocus && textareaRef.current) {
+      textareaRef.current.focus();
+      // Move cursor to end
+      const val = textareaRef.current.value;
+      textareaRef.current.value = "";
+      textareaRef.current.value = val;
+      onAutoFocusDone?.();
+    }
+  }, [autoFocus, onAutoFocusDone]);
 
   const handleSend = () => {
     if (message.trim() && !disabled) {
@@ -22,7 +38,7 @@ export function MessageInput({
     }
   };
 
-  const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -47,9 +63,10 @@ export function MessageInput({
         {/* Text Input */}
         <div className="flex-1 min-h-[35px] max-h-32 flex flex-col justify-center items-center">
           <textarea
+            ref={textareaRef}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             placeholder={placeholder}
             disabled={disabled}
             className={cn(

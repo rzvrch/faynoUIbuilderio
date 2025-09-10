@@ -13,17 +13,77 @@ export default function Index() {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [isImageChatOpen, setIsImageChatOpen] = useState(false);
 
-  // Keep track of available chats (simple example)
-  const chats = [
+  // Keep track of available chats (dynamic)
+  const [chats, setChats] = useState<{ id: string; title: string }[]>([
     {
       id: "bali-vacation",
       title: "Let’s create your perfect Bali vacation outfit ✨",
     },
-  ];
+  ]);
 
   const [selectedChatId, setSelectedChatId] = useState<string>(chats[0].id);
+  const [autoFocusChatId, setAutoFocusChatId] = useState<string | null>(null);
 
-  // Handle responsive behavior
+  // Messages per chat id
+  const [messagesMap, setMessagesMap] = useState<Record<string, ChatMessageProps[]>>({
+    "bali-vacation": [
+      {
+        message:
+          "I��m preparing for my trip to Bali 🌴✨ Can you help me find a hot evening dress that’s stylish and perfect for tropical nights?\n\nLooking for a sexy evening dress for my Bali trip. Can you suggest something?",
+        type: "sent",
+      },
+      {
+        message:
+          "Got it! I’d love to help you find the perfect evening dress for your Bali trip.\n\nBefore we start, just a few quick questions so I can suggest looks that truly fit your vibe:\n\nWhat mood are you going for — elegant, playful, or bold?\nDo you have any favorite colors or fabrics in mind?\nShould the dress feel more lightweight for tropical evenings, or chic for a fancy dinner?\n\nThe better I understand your style and context, the more beautiful outfits I can recommend. 💃",
+        type: "received",
+      },
+    ],
+  });
+
+  const handleSendMessage = (message: string) => {
+    if (!selectedChatId) return;
+    const newMessage: ChatMessageProps = {
+      message,
+      type: "sent",
+      timestamp: new Date().toLocaleTimeString("uk-UA", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    };
+
+    setMessagesMap((prev) => {
+      const prevMessages = prev[selectedChatId] ?? [];
+      return { ...prev, [selectedChatId]: [...prevMessages, newMessage] };
+    });
+
+    // Simulate assistant response after a brief delay
+    setTimeout(() => {
+      const assistantResponse: ChatMessageProps = {
+        message:
+          "Дякую за ваше ����відомлення! Я розумію, що ви шукаете стильний образ для особливого випадку. Дайте мені трохи часу, щоб підібрати ідеальний комплект одягу ��ля вашої вечері в ресторані.",
+        type: "received",
+        timestamp: new Date().toLocaleTimeString("uk-UA", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+      setMessagesMap((prev) => {
+        const prevMessages = prev[selectedChatId] ?? [];
+        return { ...prev, [selectedChatId]: [...prevMessages, assistantResponse] };
+      });
+    }, 1000);
+  };
+
+  const toggleRail = () => {
+    setIsRailCollapsed(!isRailCollapsed);
+  };
+
+  const closeRailOnMobile = () => {
+    if (isMobile) {
+      setIsRailCollapsed(true);
+    }
+  };
+
   useEffect(() => {
     const checkIsMobile = () => {
       const mobile = window.innerWidth < 768;
@@ -38,54 +98,20 @@ export default function Index() {
     window.addEventListener("resize", checkIsMobile);
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
-  const [messages, setMessages] = useState<ChatMessageProps[]>([
-    {
-      message:
-        "I��m preparing for my trip to Bali 🌴✨ Can you help me find a hot evening dress that’s stylish and perfect for tropical nights?\n\nLooking for a sexy evening dress for my Bali trip. Can you suggest something?",
-      type: "sent",
-    },
-    {
-      message:
-        "Got it! I’d love to help you find the perfect evening dress for your Bali trip.\n\nBefore we start, just a few quick questions so I can suggest looks that truly fit your vibe:\n\nWhat mood are you going for — elegant, playful, or bold?\nDo you have any favorite colors or fabrics in mind?\nShould the dress feel more lightweight for tropical evenings, or chic for a fancy dinner?\n\nThe better I understand your style and context, the more beautiful outfits I can recommend. 💃",
-      type: "received",
-    },
-  ]);
 
-  const handleSendMessage = (message: string) => {
-    const newMessage: ChatMessageProps = {
-      message,
-      type: "sent",
-      timestamp: new Date().toLocaleTimeString("uk-UA", {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    };
+  const handleStartFaynoChat = () => {
+    const id = `fayno-${Date.now()}`;
+    const title = "Discover new outfit with Fayno assistance.";
 
-    setMessages((prev) => [...prev, newMessage]);
+    // Insert at top
+    setChats((prev) => [{ id, title }, ...prev]);
 
-    // Simulate assistant response after a brief delay
-    setTimeout(() => {
-      const assistantResponse: ChatMessageProps = {
-        message:
-          "Дякую за ваше ����відомлення! Я розумію, що ви шукаете стильний образ для особливого випадку. Дайте мені трохи часу, щоб підібрати ідеальний комплект одягу ��ля вашої вечері в ресторані.",
-        type: "received",
-        timestamp: new Date().toLocaleTimeString("uk-UA", {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      };
-      setMessages((prev) => [...prev, assistantResponse]);
-    }, 1000);
-  };
+    // Create empty messages array for new chat
+    setMessagesMap((prev) => ({ ...prev, [id]: [] }));
 
-  const toggleRail = () => {
-    setIsRailCollapsed(!isRailCollapsed);
-  };
-
-  const closeRailOnMobile = () => {
-    if (isMobile) {
-      setIsRailCollapsed(true);
-    }
+    // Select the new chat and request autofocus for its input
+    setSelectedChatId(id);
+    setAutoFocusChatId(id);
   };
 
   return (
@@ -105,6 +131,8 @@ export default function Index() {
         onSearchByImage={() => setIsImageChatOpen(true)}
         selectedChatId={selectedChatId}
         onSelectChat={(id: string) => setSelectedChatId(id)}
+        onStartFaynoChat={handleStartFaynoChat}
+        chats={chats}
       />
 
       {/* Main Chat Area */}
@@ -136,10 +164,10 @@ export default function Index() {
         )}
 
         {/* Chat Messages */}
-        <ChatArea messages={messages} chatName={chats.find((c) => c.id === selectedChatId)?.title} />
+        <ChatArea messages={messagesMap[selectedChatId] ?? []} chatName={chats.find((c) => c.id === selectedChatId)?.title} />
 
         {/* Message Input */}
-        <MessageInput onSendMessage={handleSendMessage} />
+        <MessageInput onSendMessage={handleSendMessage} autoFocus={selectedChatId === autoFocusChatId} onAutoFocusDone={() => setAutoFocusChatId(null)} />
       </div>
 
       {/* Floating Action Button */}
