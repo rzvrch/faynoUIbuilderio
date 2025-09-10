@@ -165,12 +165,16 @@ export function ImageReferenceChat({
               {m.type === "system" && (
                 <div className="bg-muted p-4 rounded-lg text-sm leading-relaxed">
                   {String(m.text)
-                    .split(/\n/)
-                    .map((line, i) => (
-                      <React.Fragment key={i}>
-                        {line}
-                        <br />
-                      </React.Fragment>
+                    .split(/\n\n/)
+                    .map((para, idx, arr) => (
+                      <div key={idx} style={{ fontSize: "16px", marginBottom: idx < arr.length - 1 ? "0.5rem" : undefined }}>
+                        {para.split(/\n/).map((line, i) => (
+                          <React.Fragment key={i}>
+                            {line}
+                            <br />
+                          </React.Fragment>
+                        ))}
+                      </div>
                     ))}
                 </div>
               )}
