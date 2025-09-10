@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 
 interface ImageMessage {
@@ -33,7 +32,6 @@ export function ImageReferenceChat({
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // auto-scroll when messages change
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({
         behavior: "smooth",
@@ -53,7 +51,6 @@ export function ImageReferenceChat({
       pushMessage({ id, type: "image", url });
       setHasImage(true);
       setLastFile(file);
-      // confirmation
       setTimeout(() => {
         pushMessage({
           id: `confirm-${Date.now()}`,
@@ -68,7 +65,6 @@ export function ImageReferenceChat({
   const handleDeleteImage = useCallback((id: string, url?: string) => {
     setMessages((prev) => {
       const newArr = prev.filter((m) => m.id !== id);
-      // revoke object URL to free memory
       if (url) {
         try {
           URL.revokeObjectURL(url);
@@ -76,9 +72,7 @@ export function ImageReferenceChat({
           // ignore
         }
       }
-      // update hasImage based on remaining messages
       setHasImage(newArr.some((m) => m.type === "image"));
-      // if there are no images left, clear lastFile
       if (!newArr.some((m) => m.type === "image")) {
         setLastFile(null);
       }
@@ -115,7 +109,6 @@ export function ImageReferenceChat({
     [handleFiles],
   );
 
-  // Basic heuristic analyzer to decide whether an image is clothing-related
   const analyzeImage = useCallback(
     (file: File | null, notes: string) => {
       const clothingKeywords = [
@@ -154,7 +147,6 @@ export function ImageReferenceChat({
 
       const relevant = foundInName || foundInNotes;
 
-      // Build a concise summary using the available input (file name + notes)
       let items: string[] = [];
       clothingKeywords.forEach((k) => {
         if (lowerNotes.includes(k) || name.includes(k)) items.push(k);
@@ -171,27 +163,22 @@ export function ImageReferenceChat({
   );
 
   const handleSubmit = useCallback(() => {
-    // If an image exists, prefer to analyze the image
     if (lastFile) {
       const { relevant, summary } = analyzeImage(lastFile, input.trim());
       if (relevant) {
-        // If parent provided a handler to create a Fayno chat, use it
         const imageUrl = messages.find((m) => m.type === "image")?.url;
         if (onCreateFaynoChat) {
           onCreateFaynoChat(summary, imageUrl);
           return;
         }
-        // Fallback: show summary inside modal
         pushMessage({ id: `analysis-${Date.now()}`, type: "received", text: summary });
         return;
       }
 
-      // Not relevant -> show summary in modal
       pushMessage({ id: `analysis-${Date.now()}`, type: "received", text: summary });
       return;
     }
 
-    // No image: behave as a normal text message
     if (!input.trim()) return;
     const id = `msg-${Date.now()}`;
     pushMessage({ id, type: "sent", text: input.trim() });
