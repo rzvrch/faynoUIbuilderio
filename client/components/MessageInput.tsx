@@ -47,7 +47,7 @@ export function MessageInput({
 
   return (
     <div
-      className="p-3 sm:p-6 bg-white"
+      className="sticky bottom-0 z-20 p-3 sm:p-6 bg-white"
       style={{ border: "0px 0px 0px solid rgb(229, 231, 235)" }}
     >
       <div className="flex items-center justify-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-[28px] border border-outline bg-white">
