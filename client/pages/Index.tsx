@@ -41,7 +41,7 @@ export default function Index() {
   const [messages, setMessages] = useState<ChatMessageProps[]>([
     {
       message:
-        "I’m preparing for my trip to Bali 🌴✨ Can you help me find a hot evening dress that’s stylish and perfect for tropical nights?\n\nLooking for a sexy evening dress for my Bali trip. Can you suggest something?",
+        "I��m preparing for my trip to Bali 🌴✨ Can you help me find a hot evening dress that’s stylish and perfect for tropical nights?\n\nLooking for a sexy evening dress for my Bali trip. Can you suggest something?",
       type: "sent",
     },
     {
@@ -67,7 +67,7 @@ export default function Index() {
     setTimeout(() => {
       const assistantResponse: ChatMessageProps = {
         message:
-          "Дякую за ваше ��овідомлення! Я розумію, що ви шукаете стильний образ для особливого випадку. Дайте мені трохи часу, щоб підібрати ідеальний комплект одягу ��ля вашої вечері в ресторані.",
+          "Дякую за ваше ����відомлення! Я розумію, що ви шукаете стильний образ для особливого випадку. Дайте мені трохи часу, щоб підібрати ідеальний комплект одягу ��ля вашої вечері в ресторані.",
         type: "received",
         timestamp: new Date().toLocaleTimeString("uk-UA", {
           hour: "2-digit",
@@ -136,7 +136,7 @@ export default function Index() {
         )}
 
         {/* Chat Messages */}
-        <ChatArea messages={messages} chatName="Chat Assistant" />
+        <ChatArea messages={messages} chatName={chats.find((c) => c.id === selectedChatId)?.title} />
 
         {/* Message Input */}
         <MessageInput onSendMessage={handleSendMessage} />
