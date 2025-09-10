@@ -85,12 +85,16 @@ export default function Index() {
 
           setMessagesMap((prev) => {
             const prevMessagesInner = prev[chatId] ?? [];
-            return { ...prev, [chatId]: [...prevMessagesInner, assistantMessage] };
+            return {
+              ...prev,
+              [chatId]: [...prevMessagesInner, assistantMessage],
+            };
           });
         })
         .catch(() => {
           const assistantMessage: ChatMessageProps = {
-            message: "Couldn't fetch a cat right now, but here's a virtual meow 🐾",
+            message:
+              "Couldn't fetch a cat right now, but here's a virtual meow 🐾",
             type: "received",
             timestamp: new Date().toLocaleTimeString("uk-UA", {
               hour: "2-digit",
@@ -100,7 +104,10 @@ export default function Index() {
 
           setMessagesMap((prev) => {
             const prevMessagesInner = prev[chatId] ?? [];
-            return { ...prev, [chatId]: [...prevMessagesInner, assistantMessage] };
+            return {
+              ...prev,
+              [chatId]: [...prevMessagesInner, assistantMessage],
+            };
           });
         });
 

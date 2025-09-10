@@ -9,7 +9,13 @@ export interface ChatMessageProps {
   imageAlt?: string;
 }
 
-export function ChatMessage({ message, type, timestamp, imageUrl, imageAlt }: ChatMessageProps) {
+export function ChatMessage({
+  message,
+  type,
+  timestamp,
+  imageUrl,
+  imageAlt,
+}: ChatMessageProps) {
   return (
     <div
       className={cn(
