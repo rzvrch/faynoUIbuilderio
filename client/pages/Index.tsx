@@ -243,6 +243,34 @@ export default function Index() {
         <ImageReferenceChat
           userName={"Roman Z."}
           onClose={() => setIsImageChatOpen(false)}
+          onCreateFaynoChat={(summary: string, imageUrl?: string) => {
+            const id = `fayno-${Date.now()}`;
+            const title = "Discover new outfit with Fayno assistance.";
+
+            // Insert at top
+            setChats((prev) => [{ id, title }, ...prev]);
+
+            // Create initial assistant message with the summary and CTA
+            const assistantMessage = {
+              message: `${summary}\n\nWould you like to start discovering an outfit for you?`,
+              type: "received",
+              timestamp: new Date().toLocaleTimeString("uk-UA", {
+                hour: "2-digit",
+                minute: "2-digit",
+              }),
+              imageUrl: imageUrl,
+              imageAlt: "Reference photo",
+            } as any;
+
+            setMessagesMap((prev) => ({ ...prev, [id]: [assistantMessage] }));
+
+            // Select the new chat and request autofocus for its input
+            setSelectedChatId(id);
+            setAutoFocusChatId(id);
+
+            // Close the image modal
+            setIsImageChatOpen(false);
+          }}
         />
       )}
       <FloatingActionButton onClick={() => setIsCatalogOpen(true)} />
