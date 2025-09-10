@@ -28,6 +28,7 @@ export function NavigationRail({
   );
   const toggleMenu = () => setMenuOpen((v) => !v);
   const [isHoveringToggle, setIsHoveringToggle] = useState(false);
+  const [chatFolderOpen, setChatFolderOpen] = useState(false);
 
   useEffect(() => {
     function handleDocClick(e: MouseEvent) {
@@ -202,19 +203,43 @@ export function NavigationRail({
             </div>
 
             {/* Chat Item - Active */}
-            <div
-              className={cn(
-                "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors w-full",
-                isCollapsed && "justify-center",
-              )}
-            >
-              <div className="flex items-center justify-center w-6 h-6">
-                <MessageCircle className="w-6 h-6 text-sidebar-accent-foreground" />
+            <div className={cn("flex flex-col gap-1 w-full", isCollapsed ? "items-center" : "items-start") }>
+              <div
+                className={cn(
+                  "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors w-full",
+                  isCollapsed && "justify-center",
+                )}
+              >
+                <button
+                  title={chatFolderOpen ? "Close chats history" : "Open chats history"}
+                  aria-label={chatFolderOpen ? "Close chats history" : "Open chats history"}
+                  aria-expanded={chatFolderOpen}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setChatFolderOpen((v) => !v);
+                  }}
+                  className="p-1 rounded-md hover:bg-muted transition-colors"
+                >
+                  {chatFolderOpen ? (
+                    <FolderOpen className="w-6 h-6 text-sidebar-accent-foreground" />
+                  ) : (
+                    <Folder className="w-6 h-6 text-sidebar-accent-foreground" />
+                  )}
+                </button>
+
+                {!isCollapsed && (
+                  <span className="text-sidebar-accent-foreground font-medium">
+                    Chat
+                  </span>
+                )}
               </div>
-              {!isCollapsed && (
-                <span className="text-sidebar-accent-foreground font-medium">
-                  Chat
-                </span>
+
+              {chatFolderOpen && (
+                <div className="pl-12 pr-4 w-full">
+                  <button className="w-full text-left px-3 py-2 rounded-md hover:bg-muted text-sm text-foreground/90">
+                    Placeholder chat
+                  </button>
+                </div>
               )}
             </div>
           </div>
