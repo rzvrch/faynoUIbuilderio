@@ -314,7 +314,7 @@ export function NavigationRail({
             {!isCollapsed && (
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-sidebar-foreground truncate">
-                  User
+                  Roman Zvarych
                 </p>
                 <p className="text-xs text-sidebar-foreground/60 truncate">
                   Online
