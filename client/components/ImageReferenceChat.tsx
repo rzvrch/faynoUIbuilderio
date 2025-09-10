@@ -18,7 +18,7 @@ export function ImageReferenceChat({
     {
       id: "welcome",
       type: "system",
-      text: `Hi, ${userName}! Let’s find something beautiful for you ✨ I’ll help you create the best outfit suggestions based on your photo references. Just upload a photo or screenshot and answer a couple of quick questions so I can better understand your style and what you’re looking for. If you’re ready, go ahead and upload a photo 📸 If not, we can start by discussing your style preferences to guide the search.`,
+      text: `Hi, ${userName}! Let’s find something beautiful for you ✨\n\nI’ll help you create the best outfit suggestions based on your photo references.\n\nJust upload a photo or screenshot and leave a few notes about what’s special in this look, so I can better understand your style and what you’re looking for.\n\nIf you’re ready, go ahead and upload a photo 📸\n`,
     },
   ]);
   const [input, setInput] = useState("");
@@ -227,7 +227,7 @@ export function ImageReferenceChat({
             className="px-4 py-2 bg-primary text-primary-foreground rounded-md"
             aria-label="Send message"
           >
-            Send
+            Start chat
           </button>
         </div>
       </div>
