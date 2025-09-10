@@ -13,6 +13,16 @@ export default function Index() {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [isImageChatOpen, setIsImageChatOpen] = useState(false);
 
+  // Keep track of available chats (simple example)
+  const chats = [
+    {
+      id: "bali-vacation",
+      title: "Let’s create your perfect Bali vacation outfit ✨",
+    },
+  ];
+
+  const [selectedChatId, setSelectedChatId] = useState<string>(chats[0].id);
+
   // Handle responsive behavior
   useEffect(() => {
     const checkIsMobile = () => {
