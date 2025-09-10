@@ -229,7 +229,7 @@ export function NavigationRail({
 
                 {!isCollapsed && (
                   <span className="text-sidebar-accent-foreground font-medium">
-                    Chat
+                    Chats history
                   </span>
                 )}
               </div>
