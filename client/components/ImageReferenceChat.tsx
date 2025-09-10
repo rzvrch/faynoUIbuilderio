@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { X } from "lucide-react";
 
 interface ImageMessage {
   id: string;
@@ -58,6 +59,23 @@ export function ImageReferenceChat({
     },
     [pushMessage],
   );
+
+  const handleDeleteImage = useCallback((id: string, url?: string) => {
+    setMessages((prev) => {
+      const newArr = prev.filter((m) => m.id !== id);
+      // revoke object URL to free memory
+      if (url) {
+        try {
+          URL.revokeObjectURL(url);
+        } catch (e) {
+          // ignore
+        }
+      }
+      // update hasImage based on remaining messages
+      setHasImage(newArr.some((m) => m.type === "image"));
+      return newArr;
+    });
+  }, []);
 
   const onDrop = useCallback(
     (e: React.DragEvent) => {
@@ -174,12 +192,22 @@ export function ImageReferenceChat({
               )}
 
               {m.type === "image" && m.url && (
-                <div className="flex items-center gap-3">
-                  <img
-                    src={m.url}
-                    alt="Uploaded reference"
-                    className="w-28 h-28 object-cover rounded-md shadow-sm transition-opacity duration-300"
-                  />
+                <div className="flex items-center gap-3 relative">
+                  <div className="relative">
+                    <img
+                      src={m.url}
+                      alt="Uploaded reference"
+                      className="w-28 h-28 object-cover rounded-md shadow-sm transition-opacity duration-300"
+                    />
+                    <button
+                      aria-label="Delete image"
+                      title="Delete image"
+                      onClick={() => handleDeleteImage(m.id, m.url)}
+                      className="absolute top-2 right-2 bg-white rounded-full p-1 shadow hover:bg-muted transition-colors"
+                    >
+                      <X className="w-4 h-4 text-muted-foreground" />
+                    </button>
+                  </div>
                   <div className="flex-1">
                     <div className="text-sm text-muted-foreground">
                       Reference photo
