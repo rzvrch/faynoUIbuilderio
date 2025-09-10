@@ -21,7 +21,7 @@ export function FloatingActionButton({
         "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
         className,
       )}
-      style={{ margin: "0 50px 200px 0" }}
+      style={{ margin: "0 50px 150px 0" }}
       aria-label="Open product catalog"
     >
       <ShoppingBag className="w-6 h-6 flex flex-col justify-center items-center" />
