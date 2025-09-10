@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { MessageCircle, Menu, X, LogOut, PanelLeft } from "lucide-react";
+import { MessageCircle, Menu, ChevronLeft, LogOut, PanelLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavigationRailProps {
