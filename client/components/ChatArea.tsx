@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { ChatMessage, ChatMessageProps } from "./ChatMessage";
 
 interface ChatAreaProps {
