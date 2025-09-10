@@ -1,5 +1,4 @@
 import React, { useState, KeyboardEvent } from "react";
-import React, { useState, KeyboardEvent } from "react";
 import { Send, Image } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -31,17 +30,10 @@ export function MessageInput({
   };
 
   return (
-    <div
-      className="p-3 sm:p-6 bg-white"
-      style={{ border: "0px 0px 0px solid rgb(229, 231, 235)" }}
-    >
+    <div className="p-3 sm:p-6 bg-white" style={{ border: "0px 0px 0px solid rgb(229, 231, 235)" }}>
       <div className="flex items-center justify-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-[28px] border border-outline bg-white">
         {/* Image Attachment Button - Hidden on very small screens */}
-        <button
-          className="hidden sm:flex flex-shrink-0 p-2 rounded-full hover:bg-muted transition-colors"
-          aria-label="Attach image"
-          disabled={disabled}
-        >
+        <button className="hidden sm:flex flex-shrink-0 p-2 rounded-full hover:bg-muted transition-colors" aria-label="Attach image" disabled={disabled}>
           <Image className="w-6 h-6 text-foreground" />
         </button>
 
@@ -79,9 +71,7 @@ export function MessageInput({
           disabled={!message.trim() || disabled}
           className={cn(
             "flex-shrink-0 p-2 rounded-full transition-colors",
-            message.trim() && !disabled
-              ? "text-primary hover:bg-primary/10"
-              : "text-outline cursor-not-allowed",
+            message.trim() && !disabled ? "text-primary hover:bg-primary/10" : "text-outline cursor-not-allowed",
           )}
           aria-label="Send message"
         >
