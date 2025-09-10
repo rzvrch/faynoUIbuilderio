@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import React, { useEffect, useState } from "react";
 import { NavigationRail } from "../components/NavigationRail";
 import { ChatArea } from "../components/ChatArea";
@@ -60,7 +59,7 @@ export default function Index() {
     setTimeout(() => {
       const assistantResponse: ChatMessageProps = {
         message:
-          "Дякую за ваше повідомлення! Я розумію, що ви шукаете стильний образ для особливого випадку. Дайте мені трохи часу, щоб підібрати ідеальний комплект одягу для вашої вечері в ресторані.",
+          "Дякую за ваше повідомлення! Я розумію, що ви шукаете стильний образ для особливого випадку. Дайте мені трохи часу, щоб підібрати ідеальний комплект одягу ��ля вашої вечері в ресторані.",
         type: "received",
         timestamp: new Date().toLocaleTimeString("uk-UA", {
           hour: "2-digit",
