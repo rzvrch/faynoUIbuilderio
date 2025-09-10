@@ -121,7 +121,17 @@ export function NavigationRail({
       </div>
 
       {/* Navigation Items */}
-      <div className="flex-1 p-4 mr-auto flex flex-col justify-start items-start">
+      <div
+        className={cn(
+          "flex-1 p-4 mr-auto flex flex-col justify-start items-start",
+          isCollapsed ? "cursor-pointer" : "",
+        )}
+        onClick={(e) => {
+          // only trigger when clicking the container background itself
+          if (e.target !== e.currentTarget) return;
+          if (isCollapsed) onToggle?.();
+        }}
+      >
         <div className="space-y-2">
           <div className="flex flex-col mr-auto">
             {/* Add New Chat Button */}
