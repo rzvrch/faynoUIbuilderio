@@ -5,6 +5,7 @@ import { MessageInput } from "../components/MessageInput";
 import { FloatingActionButton } from "../components/FloatingActionButton";
 import { ProductCatalog } from "../components/ProductCatalog";
 import { ChatMessageProps } from "../components/ChatMessage";
+import { ImageReferenceChat } from "../components/ImageReferenceChat";
 
 export default function Index() {
   const [isRailCollapsed, setIsRailCollapsed] = useState(true); // Start collapsed on mobile
@@ -89,7 +90,7 @@ export default function Index() {
       )}
 
       {/* Navigation Rail */}
-      <NavigationRail isCollapsed={isRailCollapsed} onToggle={toggleRail} />
+      <NavigationRail isCollapsed={isRailCollapsed} onToggle={toggleRail} onSearchByImage={() => setIsImageChatOpen(true)} />
 
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col min-w-0 relative">
