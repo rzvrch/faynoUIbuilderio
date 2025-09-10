@@ -185,7 +185,7 @@ export function NavigationRail({
           {/* Chat Item - Active */}
           <div
             className={cn(
-              "flex items-center gap-3 p-3 rounded-[28px] bg-sidebar-accent cursor-pointer transition-colors",
+              "flex items-center gap-3 p-3 rounded-[28px] bg-[rgba(252,248,245,1)] cursor-pointer transition-colors",
               isCollapsed && "justify-center",
             )}
           >
@@ -202,7 +202,7 @@ export function NavigationRail({
       </div>
 
       {/* User Avatar */}
-      <div className="p-4 border-t border-sidebar-border">
+      <div className="p-4">
         <div
           className={cn(
             "flex items-center gap-3 w-full",
