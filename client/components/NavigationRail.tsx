@@ -115,6 +115,7 @@ export function NavigationRail({
       {/* Navigation Items */}
       <div className="flex-1 p-4 mr-auto flex flex-col justify-start items-start">
         <div className="space-y-2">
+          <div className="flex flex-col mr-auto">
           {/* Add New Chat Button */}
           <div className="relative" ref={menuRef}>
             <button
@@ -197,6 +198,7 @@ export function NavigationRail({
                 Chat
               </span>
             )}
+          </div>
           </div>
         </div>
       </div>
