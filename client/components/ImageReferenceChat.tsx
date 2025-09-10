@@ -208,8 +208,8 @@ export function ImageReferenceChat({
             aria-label="Upload image or type your style preferences"
             placeholder={
               hasImage
-                ? "Add more notes or preferences..."
-                : "Upload a photo or type your style preferences..."
+                ? "Let us know what’s special you see on this look"
+                : "Let us know what’s special you see on this look"
             }
             value={input}
             onChange={(e) => setInput(e.target.value)}
